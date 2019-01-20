@@ -1,0 +1,43 @@
+@import 'common/normalize';
+@import 'common/functions';
+@import 'common/mixins';
+
+.font-face('Source Sans Pro', '/fonts/SourceSansProLight.ttf', 300);
+.font-face('Source Sans Pro', '/fonts/SourceSansProRegular.ttf', 400);
+.font-face('Source Sans Pro', '/fonts/SourceSansProSemiBold.ttf', 600);
+.font-face('Source Sans Pro', '/fonts/SourceSansProBold.ttf', 700);
+
+@primary-font: 'Source Sans Pro';
+
+@header_color: #1D2C4C;
+@blue_1: #525975;
+@blue_2: #BABDC8;
+@blue_3: #D4D5DD;
+@blue_4: #EDEDF2;
+@blue_5: #F6F7F8;
+@red_1: #755252;
+@red_2: #D6AAAA;
+@red_3: #FFD1D1;
+@yellow_1: #756952;
+@yellow_2: #D6CBA6;
+@yellow_3: #FFF4CA;
+
+.common-input {
+
+    .font(@primary-font, 15px, 500, @header_color);
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+
+    &:focus {
+    }
+
+}
+
+.common-button {
+    .font(@primary-font, 14px, 700, #fff);
+    padding: 10px 18px;
+    background-color: @blue_1;
+    border-radius: 3px;
+}

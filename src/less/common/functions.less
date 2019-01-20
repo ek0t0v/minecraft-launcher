@@ -1,0 +1,22 @@
+.font-face(@name, @src, @weight) {
+    @font-face {
+        font-family: @name;
+        src: url(@src) format('opentype');
+        font-weight: @weight;
+        font-style: normal;
+    }
+}
+
+.flex(@direction, @wrap, @justify-content, @align-items) {
+    display: flex;
+    flex-flow: @direction @wrap;
+    justify-content: @justify-content;
+    align-items: @align-items;
+}
+
+.font(@font, @size, @weight, @color) {
+    font-family: @font, Helvetica, sans-serif;
+    font-size: @size;
+    font-weight: @weight;
+    color: @color;
+}
