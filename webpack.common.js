@@ -8,8 +8,11 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/dist/',
+        publicPath: 'dist/',
         filename: '[name].js',
+    },
+    node: {
+        child_process: 'empty',
     },
     module: {
         rules: [
@@ -71,5 +74,8 @@ module.exports = {
                 },
             },
         },
+    },
+    externals: {
+        'child_process': 'require("electron").remote.require("child_process")',
     },
 };

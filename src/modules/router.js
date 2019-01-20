@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import Home from '../pages/Home';
+import Home from '../async/Home';
 import Settings from '../pages/Settings';
 
 const router = new VueRouter({

@@ -4,13 +4,16 @@
     "description": "",
     "repository": {
         "type" : "git",
-        "url" : "https://github.com/seniorcote/launcher"
+        "url" : "git@github.com:seniorcote/launcher.git"
     },
     "main": "main.js",
     "scripts": {
         "start": "electron .",
         "build": "webpack --config webpack.prod.js",
-        "dev": "webpack-dev-server --config webpack.dev.js"
+        "dev": "webpack-dev-server --config webpack.dev.js",
+        "package-windows": "electron-packager . launcher --overwrite --platform=win32 --arch=x64 --app-version=0.0.1 --out=release-builds --icon=assets/icons/png/1024x1024.png --prune",
+        "package-linux": "electron-packager . launcher --overwrite --platform=linux --arch=x64 --app-version=0.0.1 --out=release-builds --asar=true --icon=assets/icons/png/1024x1024.png --prune",
+        "package-mac": "electron-packager . launcher --overwrite --platform=darwin --arch=x64 --app-version=0.0.1 --out=release-builds --icon=assets/icons/mac/icon.icns --prune"
     },
     "author": "dev@seniorcote.com",
     "license": "MIT",
