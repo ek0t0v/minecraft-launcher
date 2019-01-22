@@ -24,7 +24,7 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../less/style';
+    @import (reference) '../styles/style';
 
     .page-header {
         width: 100%;
@@ -38,6 +38,9 @@
 
         &__item {
 
+            color: #222;
+            font-size: 20px;
+            font-weight: 700;
             margin: 0 12px 0 0;
 
             &:last-child {

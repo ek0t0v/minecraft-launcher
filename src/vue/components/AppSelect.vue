@@ -22,6 +22,7 @@
                 :class="{
                     'app-select__menu--appears-from-top': appearsFrom === 'top',
                     'app-select__menu--appears-from-bottom': appearsFrom === 'bottom',
+                    'app-select__menu--appears-from-top-with-label': appearsFrom === 'top' && label,
                 }"
             >
                 <div
@@ -92,7 +93,7 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../less/style';
+    @import (reference) '../styles/style';
 
     .app-select {
 
@@ -109,11 +110,10 @@
             .text-clip;
             .font(@classic__g__font, 15px, 600, @classic__select__input__color);
             width: 100%;
-            padding: 10px 12px;
+            padding: 10px 0;
             box-sizing: border-box;
-            border-radius: 3px;
+            border-bottom: 3px solid @classic__select__border__color;
             cursor: pointer;
-            background-color: @classic__select__input__background-color;
 
             &::placeholder {
                 color: @classic__select__placeholder__color;
@@ -122,23 +122,23 @@
 
         }
 
-        &__menu { // высота меню 41
+        &__menu {
             width: 100%;
             padding: 6px 0;
             background-color: @classic__select__menu__background-color;
             position: absolute;
-            border-radius: 3px;
             box-shadow: 0 0 0 1px rgba(0,0,0,.025), 0 4px 16px rgba(0,0,0,.15);
-            /*top: 39px;*/
-            /*box-shadow: 0 1px 0 0 rgba(0,0,0,.1), 0 0 0 1px rgba(0,0,0,.1);*/
 
+            &--appears-from-top-with-label {
+                top: 63px !important;
+            }
 
             &--appears-from-top {
-                top: 39px;
+                top: 42px;
             }
 
             &--appears-from-bottom {
-                bottom: 39px;
+                bottom: 42px;
             }
 
         }
@@ -178,7 +178,7 @@
 
     .select-transition-from-bottom-enter, .select-transition-from-bottom-leave-to {
         transform-origin: top;
-        transform: scale(.9) translateY(12px) translateY(12px);
+        transform: scale(.9) translateY(15px) translateY(15px);
         opacity: 0;
     }
 </style>

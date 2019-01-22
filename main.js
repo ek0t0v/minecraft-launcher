@@ -1,21 +1,17 @@
 const { app, BrowserWindow } = require('electron');
 const storage = require('electron-json-storage-sync');
-const deepmerge = require('deepmerge');
 const _ = require('lodash/core');
-const defaultConfig = require('./config');
+const defaultConfig = require('./src/node/config');
 
-// const ipc = require('electron').ipcRenderer;
+function initConfig() {
+    if (!storage.get('config').status) {
+        const result = storage.set('config', defaultConfig);
 
-// const storage = require('electron-json-storage');
-// const _ = require('lodash');
-// const remote = require('electron').remote;
-// const fs = remote.require('fs');
-
-// const defaultConfig = {
-//     theme: 'classic',
-//     sidebarPosition: 'right',
-//     locale: 'en',
-// };
+        if (!result.status) {
+            throw 'Failed to initialize application config.';
+        }
+    }
+}
 
 function initWindow() {
     let window = new BrowserWindow({
@@ -32,21 +28,16 @@ function initWindow() {
     return window;
 }
 
-function registerMessageHandlers() {
-    require('./src/handlers/config');
+function registerListeners() {
+    require('./src/node/listeners/config');
 }
 
 app.on('ready', () => {
-    if (!storage.get('config').status) {
-        const result = storage.set('config', defaultConfig);
+    initConfig();
+    registerListeners();
+    initWindow();
 
-        if (!result.status) {
-            throw 'Failed to initialize application config.';
-        }
+    if (process.env.NODE_ENV === 'development') {
+        require('vue-devtools').install();
     }
-
-    registerMessageHandlers();
-
-    const window = initWindow();
-    window.webContents.send('test' , {msg:'hello from main process'});
 });

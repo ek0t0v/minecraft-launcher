@@ -12,17 +12,34 @@
     "play": {
         "nickname": {
             "label": "Nickname",
-            "placeholder": "Placeholder"
+            "placeholder": "Nickname"
         },
         "version": {
             "label": "Version",
-            "placeholder": "Placeholder"
+            "placeholder": "Version"
         },
         "button": "Play!"
     },
     "settings": {
         "header": {
             "title": "Settings"
+        },
+        "element": {
+            "locale": {
+                "label": "Language"
+            },
+            "versionsDirectory": {
+                "label": "Directory",
+                "placeholder": "/home/cote/.minecraft"
+            },
+            "jvmArgs": {
+                "label": "JVM arguments",
+                "placeholder": "-XX:MaxPermSize=256M"
+            },
+            "minecraftArgs": {
+                "label": "Minecraft arguments",
+                "placeholder": "--server 127.0.0.1"
+            }
         }
     },
     "accounts": {

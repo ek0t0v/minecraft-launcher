@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import Home from '../async/Home';
+import Home from '../pages/Home';
 import Settings from '../pages/Settings';
 import Accounts from '../pages/Accounts';
 import About from '../pages/About';

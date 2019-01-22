@@ -12,17 +12,34 @@
     "play": {
         "nickname": {
             "label": "Ник",
-            "placeholder": "Placeholder"
+            "placeholder": "Ник"
         },
         "version": {
             "label": "Версия",
-            "placeholder": "Placeholder"
+            "placeholder": "Версия"
         },
         "button": "Играть!"
     },
     "settings": {
         "header": {
             "title": "Настройки"
+        },
+        "element": {
+            "locale": {
+                "label": "Язык"
+            },
+            "versionsDirectory": {
+                "label": "Директория",
+                "placeholder": "/home/cote/.minecraft"
+            },
+            "jvmArgs": {
+                "label": "Аргументы JVM",
+                "placeholder": "-XX:MaxPermSize=256M"
+            },
+            "minecraftArgs": {
+                "label": "Аргументы Minecraft",
+                "placeholder": "--server 127.0.0.1"
+            }
         }
     },
     "accounts": {

@@ -12,10 +12,7 @@ export default {
     namespaced: true,
     state: initialState,
     getters: {
-        all: state => state,
-        locale: state => state.locale,
-        theme: state => state.theme,
-        sidebarPosition: state => state.sidebarPosition,
+        config: state => state,
     },
     actions: {
         init({ commit }, payload) {
@@ -28,7 +25,7 @@ export default {
     },
     mutations: {
         init(state, payload) {
-            state = payload;
+            Object.assign(state, payload);
         },
         updateConfig(state, payload) {
             Object.assign(state, { [payload.key]: payload.value });

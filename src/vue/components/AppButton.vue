@@ -21,7 +21,7 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../less/style';
+    @import (reference) '../styles/style';
 
     .app-button {
 

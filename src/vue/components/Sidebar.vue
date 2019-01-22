@@ -23,14 +23,14 @@
         <div class="sidebar-play">
             <app-input
                 class="sidebar-play__element"
-                :label="$t('play.nickname.label')"
+                :placeholder="$t('play.nickname.placeholder')"
             />
             <app-select
                 class="sidebar-play__element"
                 :choices="choices"
                 :current="currentVersion"
-                :label="$t('play.version.label')"
                 :appears-from="'bottom'"
+                :placeholder="$t('play.version.placeholder')"
                 @on-select="onSelect"
             />
             <app-button
@@ -117,11 +117,11 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../less/style';
+    @import (reference) '../styles/style';
 
     .sidebar {
         .flex(column, nowrap, space-between, flex-start);
-        width: 240px;
+        width: 280px;
         height: 100vh;
         padding: 24px;
         box-sizing: border-box;

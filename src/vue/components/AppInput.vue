@@ -31,7 +31,7 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../less/style';
+    @import (reference) '../styles/style';
 
     .app-input {
 
@@ -47,10 +47,9 @@
 
             .font(@classic__g__font, 15px, 600, @classic__input__color);
             width: 100%;
-            padding: 10px 12px;
+            padding: 10px 0;
             box-sizing: border-box;
-            border-radius: 3px;
-            background-color: @classic__input__background-color;
+            border-bottom: 3px solid @classic__input__border__color;
 
             &::placeholder {
                 color: @classic__input__placeholder__color;

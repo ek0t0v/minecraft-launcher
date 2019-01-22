@@ -1,8 +1,8 @@
 <template>
     <div class="page">
-        <page-header>{{ $t('accounts.header.title') }}</page-header>
+        <page-header>{{ $t('about.header.title') }}</page-header>
         <page-content>
-            Accounts...
+            About...
         </page-content>
     </div>
 </template>
@@ -12,7 +12,7 @@
     import PageContent from '../components/PageContent';
 
     export default {
-        name: 'Accounts',
+        name: 'About',
         components: {
             PageHeader,
             PageContent,
@@ -21,5 +21,5 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../less/style';
+    @import (reference) '../styles/style';
 </style>
