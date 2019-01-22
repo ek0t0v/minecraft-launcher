@@ -1,4 +1,14 @@
 {
+    "locales": [
+        {
+            "name": "English",
+            "value": "en"
+        },
+        {
+            "name": "Русский",
+            "value": "ru"
+        }
+    ],
     "play": {
         "nickname": {
             "label": "Nickname",

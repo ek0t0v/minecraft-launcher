@@ -3,7 +3,7 @@
         <page-header>{{ $t('settings.header.title') }}</page-header>
         <page-content>
             <app-select
-                :choices="locales"
+                :choices="$t('locales')"
                 :current="currentLocale"
                 @on-select="selectLocale"
             />
@@ -24,26 +24,12 @@
             PageContent,
             AppSelect,
         },
-        data() {
-            return {
-                locales: [
-                    {
-                        name: 'English',
-                        value: 'en',
-                    },
-                    {
-                        name: 'Русский',
-                        value: 'ru',
-                    },
-                ],
-            };
-        },
         computed: {
             ...mapGetters('config', {
                 locale: 'locale',
             }),
             currentLocale() {
-                return this.locales.filter(locale => {
+                return this.$t('locales').filter(locale => {
                     return locale.value === this.locale;
                 })[0];
             },
