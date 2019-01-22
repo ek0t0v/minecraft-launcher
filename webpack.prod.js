@@ -5,12 +5,6 @@ const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'production',
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.min.js',
-            'vue$': 'vue/dist/vue.esm.js',
-        },
-    },
     optimization: {
         minimizer: [
             new UglifyJsWebpackPlugin({

@@ -3,22 +3,21 @@
     "version": "0.0.1",
     "description": "",
     "repository": {
-        "type" : "git",
-        "url" : "git@github.com:seniorcote/launcher.git"
+        "type": "git",
+        "url": "git@github.com:seniorcote/launcher.git"
     },
     "main": "main.js",
     "scripts": {
         "start": "electron .",
         "build": "webpack --config webpack.prod.js",
         "dev": "webpack-dev-server --config webpack.dev.js",
-        "package-windows": "electron-packager . launcher --overwrite --platform=win32 --arch=x64 --app-version=0.0.1 --out=release-builds --icon=assets/icons/png/1024x1024.png --prune",
-        "package-linux": "electron-packager . launcher --overwrite --platform=linux --arch=x64 --app-version=0.0.1 --out=release-builds --asar=true --icon=assets/icons/png/1024x1024.png --prune",
-        "package-mac": "electron-packager . launcher --overwrite --platform=darwin --arch=x64 --app-version=0.0.1 --out=release-builds --icon=assets/icons/mac/icon.icns --prune"
+        "package-windows": "electron-packager . launcher --overwrite --platform=win32 --arch=x64 --app-version=0.0.1 --out=releases --icon=assets/icons/png/1024x1024.png --prune",
+        "package-linux": "electron-packager . launcher --overwrite --platform=linux --arch=x64 --app-version=0.0.1 --out=releases --asar=true --icon=assets/icons/png/1024x1024.png --prune",
+        "package-mac": "electron-packager . launcher --overwrite --platform=darwin --arch=x64 --app-version=0.0.1 --out=releases --icon=assets/icons/mac/icon.icns --prune"
     },
     "author": "dev@seniorcote.com",
     "license": "MIT",
     "devDependencies": {
-        "electron": "^4.0.1",
         "@babel/core": "^7.2.2",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/preset-env": "^7.2.3",
@@ -28,6 +27,7 @@
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "clean-webpack-plugin": "^1.0.0",
         "css-loader": "^2.0.2",
+        "electron": "^4.0.1",
         "eslint": "^5.8.0",
         "eslint-plugin-vue": "^5.0.0-beta.3",
         "file-loader": "^3.0.1",
@@ -45,9 +45,13 @@
         "webpack-merge": "^4.1.4"
     },
     "dependencies": {
+        "deepmerge": "^3.1.0",
+        "electron-json-storage-sync": "^1.1.1",
+        "lodash": "^4.17.11",
         "vue": "^2.5.22",
         "vue-i18n": "^8.7.0",
-        "vue-router": "^3.0.2"
+        "vue-router": "^3.0.2",
+        "vuex": "^3.1.0"
     },
     "babel": {
         "presets": [
@@ -70,7 +74,8 @@
         ],
         "env": {
             "browser": true,
-            "es6": true
+            "es6": true,
+            "node": true
         },
         "plugins": [
             "vue"

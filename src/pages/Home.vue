@@ -1,20 +1,10 @@
 <template>
-    <div>
-        <div class="home">
-            <div>Launcher (home page)</div>
-        </div>
-        <sidebar />
-    </div>
+    <div class="home"></div>
 </template>
 
 <script>
-    import Sidebar from '../components/Sidebar';
-
     export default {
         name: 'Home',
-        components: {
-            Sidebar,
-        },
     }
 </script>
 

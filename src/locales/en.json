@@ -1,2 +1,28 @@
 {
+    "play": {
+        "nickname": {
+            "label": "Nickname",
+            "placeholder": "Placeholder"
+        },
+        "version": {
+            "label": "Version",
+            "placeholder": "Placeholder"
+        },
+        "button": "Play!"
+    },
+    "settings": {
+        "header": {
+            "title": "Settings"
+        }
+    },
+    "accounts": {
+        "header": {
+            "title": "Accounts"
+        }
+    },
+    "about": {
+        "header": {
+            "title": "About"
+        }
+    }
 }

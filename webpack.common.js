@@ -61,6 +61,10 @@ module.exports = {
     resolve: {
         modules: ['node_modules', 'src'],
         extensions: ['.js', '.vue', '.less', '.json'],
+        alias: {
+            vue: 'vue/dist/vue.js',
+            'vue$': 'vue/dist/vue.esm.js',
+        },
     },
     optimization: {
         splitChunks: {
@@ -75,7 +79,9 @@ module.exports = {
             },
         },
     },
+    target: 'electron-renderer',
     externals: {
         'child_process': 'require("electron").remote.require("child_process")',
+        'ipc': 'require("electron").ipcRenderer',
     },
 };

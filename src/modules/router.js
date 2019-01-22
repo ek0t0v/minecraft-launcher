@@ -1,6 +1,8 @@
 import VueRouter from 'vue-router';
 import Home from '../async/Home';
 import Settings from '../pages/Settings';
+import Accounts from '../pages/Accounts';
+import About from '../pages/About';
 
 const router = new VueRouter({
     routes: [
@@ -10,9 +12,19 @@ const router = new VueRouter({
             name: 'home',
         },
         {
+            path: '/accounts',
+            component: Accounts,
+            name: 'accounts',
+        },
+        {
             path: '/settings',
             component: Settings,
             name: 'settings',
+        },
+        {
+            path: '/about',
+            component: About,
+            name: 'about',
         },
         {
             path: '*',

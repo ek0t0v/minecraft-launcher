@@ -1,6 +1,6 @@
 <template>
     <div
-        class="button"
+        class="app-button"
         @click="onClick"
     >
         <span>
@@ -23,17 +23,21 @@
 <style lang="less" scoped>
     @import (reference) '../less/style';
 
-    .button {
+    .app-button {
 
         .flex(row, nowrap, center, center);
         padding: 10px 16px;
-        background-color: #23CFA6;
+        background-color: @classic__button__background-color;
         border-radius: 3px;
+        cursor: pointer;
+        transition: .1s background-color ease-in-out;
+
+        &:hover {
+            background-color: lighten(@classic__button__background-color, 2%);
+        }
 
         span {
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff;
+            .font(@classic__g__font, 15px, 700, @classic__button__color);
             display: block;
         }
 

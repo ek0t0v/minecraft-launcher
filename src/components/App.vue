@@ -3,12 +3,18 @@
         <keep-alive>
             <router-view />
         </keep-alive>
+        <sidebar />
     </div>
 </template>
 
 <script>
+    import Sidebar from '../components/Sidebar';
+
     export default {
         name: 'App',
+        components: {
+            Sidebar,
+        },
     }
 </script>
 

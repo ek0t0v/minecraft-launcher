@@ -5,10 +5,15 @@
 
 body {
     .flex(column, nowrap, flex-start, flex-start);
-    .font(@primary-font, 16px, 400, #333);
+    .font(@classic__g__font, 16px, 400, #333);
     width: 100%;
     background-color: @background;
     //-webkit-app-region: drag;
+}
+
+.page {
+    width: calc(100% - 240px);
+    margin: 0 240px 0 0;
 }
 
 .fade-enter-active, .fade-leave-active {

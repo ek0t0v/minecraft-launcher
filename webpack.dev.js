@@ -8,13 +8,7 @@ module.exports = merge(common, {
         contentBase: './',
         compress: true,
         host: '0.0.0.0',
-        port: 8080,
-    },
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.js',
-            'vue$': 'vue/dist/vue.esm.js',
-        },
+        port: 8082,
     },
     plugins: [
         new webpack.DefinePlugin({

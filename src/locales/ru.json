@@ -1,2 +1,28 @@
 {
+    "play": {
+        "nickname": {
+            "label": "Ник",
+            "placeholder": "Placeholder"
+        },
+        "version": {
+            "label": "Версия",
+            "placeholder": "Placeholder"
+        },
+        "button": "Играть!"
+    },
+    "settings": {
+        "header": {
+            "title": "Настройки"
+        }
+    },
+    "accounts": {
+        "header": {
+            "title": "Аккаунты"
+        }
+    },
+    "about": {
+        "header": {
+            "title": "О лаунчере"
+        }
+    }
 }
