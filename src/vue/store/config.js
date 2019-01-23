@@ -1,4 +1,4 @@
-import { updateConfig } from '../modules/config';
+import { updateConfig } from '../commands/config';
 
 function initialState() {
     return {
@@ -13,6 +13,7 @@ export default {
     state: initialState,
     getters: {
         config: state => state,
+        locale: state => state.locale,
     },
     actions: {
         init({ commit }, payload) {
@@ -20,6 +21,7 @@ export default {
         },
         updateConfig({ commit }, payload) {
             updateConfig(payload.key, payload.value);
+
             commit('updateConfig', payload);
         },
     },

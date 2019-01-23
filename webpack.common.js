@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
@@ -59,7 +58,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'style.css',
         }),
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new CleanWebpackPlugin(['dist']),
     ],
     resolve: {
@@ -78,7 +76,7 @@ module.exports = {
                     chunks: 'all',
                     name: 'vendor',
                     test: /[\\/]node_modules[\\/]/,
-                    enforce: true
+                    enforce: true,
                 },
             },
         },

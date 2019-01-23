@@ -62,7 +62,6 @@
                     key: 'locale',
                     value: payload.value,
                 });
-                this.$i18n.locale = payload.value;
             },
         },
     }

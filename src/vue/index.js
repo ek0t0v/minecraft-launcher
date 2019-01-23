@@ -8,8 +8,9 @@ import en from '../../resources/locales/en';
 import ru from '../../resources/locales/ru';
 import './styles/style.less';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
-const ipc = require('ipc');
+import { loadConfig } from './commands/config';
+import { loadLocales } from './commands/locale';
+import './listeners';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -31,9 +32,6 @@ new Vue({
     render: h => h(App),
 });
 
-ipc.send('loadConfig');
-ipc.on('loadConfig', (e, payload) => {
-    store.dispatch('config/init', payload);
-    i18n.locale = payload.locale;
-});
+loadConfig();
+loadLocales();
 

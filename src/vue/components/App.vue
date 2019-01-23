@@ -1,5 +1,6 @@
 <template>
     <div class="app">
+        <locale-changer />
         <loading v-if="isLoadingActive" />
         <keep-alive>
             <router-view />
@@ -11,6 +12,7 @@
 <script>
     import Sidebar from './Sidebar';
     import Loading from './Loading';
+    import LocaleChanger from './LocaleChanger';
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
@@ -18,6 +20,7 @@
         components: {
             Sidebar,
             Loading,
+            LocaleChanger,
         },
         computed: {
             ...mapGetters('loading', {
@@ -25,7 +28,7 @@
             }),
         },
         mounted() {
-            setInterval(() => this.nextStep(), 1000);
+            setInterval(() => this.nextStep(), 100);
         },
         methods: {
             ...mapActions('loading', {
