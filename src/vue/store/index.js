@@ -17,13 +17,5 @@ export default new Vuex.Store({
     state: initialState,
     getters: {},
     actions: {},
-    mutations: {
-        reset(state) {
-            const s = initialState();
-
-            Object.keys(s).forEach(key => {
-                state[key] = s[key]
-            });
-        },
-    },
+    mutations: {},
 })

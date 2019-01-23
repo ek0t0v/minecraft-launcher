@@ -47,7 +47,6 @@
     import AppButton from '../components/AppButton';
     import AppInput from '../components/AppInput';
     import AppSelect from '../components/AppSelect';
-    import { execute } from '../modules/command';
 
     export default {
         name: 'Sidebar',
@@ -104,11 +103,7 @@
             },
         },
         methods: {
-            play() {
-                execute('java -jar ~/.minecraft/versions/a1.2.6/a1.2.6.jar', output => {
-                    alert(output);
-                });
-            },
+            play() {},
             onSelect(item) {
                 this.currentVersion = item;
             },

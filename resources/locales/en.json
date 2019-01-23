@@ -1,4 +1,11 @@
 {
+    "bootstrap": {
+        "step": {
+            "loadConfig": "Load config...",
+            "checkJava": "Check java...",
+            "loadVersions": "Load versions..."
+        }
+    },
     "locales": [
         {
             "name": "English",

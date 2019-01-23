@@ -1,15 +1,9 @@
 function initialState() {
     return {
-        isActive: true,
-        steps: [
-            'Инициализация лаунчера...',
-            'Чтение конфига...',
-            'Проверка наличия джавы...',
-            'Чтение списка серверов...',
-            '...',
-            'Готово!',
-        ],
-        currentStep: 0,
+        active: true,
+        step: {
+            name: null,
+        },
     };
 }
 
@@ -17,42 +11,35 @@ export default {
     namespaced: true,
     state: initialState,
     getters: {
-        isActive: state => state.isActive,
-        step: state => state.steps[state.currentStep],
+        active: state => state.active,
+        step: state => state.step,
     },
     actions: {
         start({ commit }) {
             commit('start');
         },
         stop({ commit }) {
+            commit('reset');
             commit('stop');
         },
-        nextStep({ commit, state }) {
-            if (state.steps.length === state.currentStep + 1) {
-                commit('stop');
-
-                return;
-            }
-
-            commit('nextStep');
+        setStep({ commit }, payload) {
+            commit('setStep', payload);
         },
     },
     mutations: {
         start(state) {
-            state.isActive = true;
+            state.active = true;
         },
         stop(state) {
-            state.isActive = false;
+            state.active = false;
         },
-        nextStep(state) {
-            state.currentStep = state.currentStep + 1;
+        setStep(state, payload) {
+            state.step = payload;
         },
         reset(state) {
             const s = initialState();
 
-            Object.keys(s).forEach(key => {
-                state[key] = s[key]
-            });
+            Object.keys(s).forEach(key => state[key] = s[key]);
         },
     },
 }

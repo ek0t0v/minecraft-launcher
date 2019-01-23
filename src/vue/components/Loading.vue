@@ -3,22 +3,15 @@
         <div class="loading">
             <div class="loading__overlay" />
             <div class="loading__content">
-                {{ step }}
+                <slot />
             </div>
         </div>
     </transition>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-
     export default {
         name: 'Loading',
-        computed: {
-            ...mapGetters('loading', {
-                step: 'step',
-            }),
-        },
     }
 </script>
 
