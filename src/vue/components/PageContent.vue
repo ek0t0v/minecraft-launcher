@@ -14,6 +14,8 @@
     @import (reference) '../styles/style';
 
     .page-content {
+        /*height: 1000px;*/
+        /*overflow-y: auto;*/
         padding: 4px 24px 24px 24px;
         box-sizing: border-box;
     }

@@ -41,3 +41,7 @@ app.on('ready', () => {
         require('vue-devtools').install();
     }
 });
+
+app.on('window-all-closed', () => {
+    if (process.platform != 'darwin') app.quit();
+});

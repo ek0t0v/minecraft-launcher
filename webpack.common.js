@@ -45,7 +45,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.(ttf|eot|woff|woff2|svg)(\?[\s\S]+)?$/,
+                test: /\.(ttf|eot|woff|woff2|svg|png)(\?[\s\S]+)?$/,
                 use: 'file-loader?name=./fonts/[hash].[ext]',
             },
         ],
