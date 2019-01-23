@@ -45,8 +45,12 @@ module.exports = {
                 },
             },
             {
-                test: /\.(ttf|eot|woff|woff2|svg|png)(\?[\s\S]+)?$/,
+                test: /\.(ttf|eot|woff|woff2|svg)(\?[\s\S]+)?$/,
                 use: 'file-loader?name=./fonts/[hash].[ext]',
+            },
+            {
+                test: /\.(jpg|jpeg|png|gif)(\?[\s\S]+)?$/,
+                use: 'file-loader?name=./images/[hash].[ext]',
             },
         ],
     },

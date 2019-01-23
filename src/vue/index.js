@@ -4,8 +4,8 @@ import VueI18n from 'vue-i18n'
 import router from './modules/router';
 import App from './components/App';
 import store from './store';
-import en from '../../locales/en';
-import ru from '../../locales/ru';
+import en from '../../resources/locales/en';
+import ru from '../../resources/locales/ru';
 import './styles/style.less';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 

@@ -1,6 +1,6 @@
 {
     "name": "Launcher",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "",
     "repository": {
         "type": "git",
@@ -11,9 +11,9 @@
         "start": "electron .",
         "build": "webpack --config webpack.prod.js",
         "dev": "webpack-dev-server --config webpack.dev.js",
-        "package-windows": "electron-packager . launcher --overwrite --platform=win32 --arch=x64 --app-version=0.0.1 --out=releases --asar=true --icon=resources/img/icon.png --prune",
-        "package-linux": "electron-packager . launcher --overwrite --platform=linux --arch=x64 --app-version=0.0.1 --out=releases --asar=true --icon=resources/img/icon.png --prune",
-        "package-mac": "electron-packager . launcher --overwrite --platform=darwin --arch=x64 --app-version=0.0.1 --out=releases --asar=true --icon=assets/icons/mac/icon.icns --prune"
+        "package-windows": "electron-packager . launcher --overwrite --platform=win32 --arch=x64 --app-version=0.0.2 --out=releases --asar --icon=resources/icons/icon.png --prune",
+        "package-linux": "electron-packager . launcher --overwrite --platform=linux --arch=x64 --app-version=0.0.2 --out=releases --asar --icon=resources/icons/icon.png --prune",
+        "package-mac": "electron-packager . launcher --overwrite --platform=darwin --arch=x64 --app-version=0.0.2 --out=releases --asar --icon=resources/icons/icon.png --prune"
     },
     "author": "dev@seniorcote.com",
     "license": "MIT",

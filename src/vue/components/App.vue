@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-        <bootstrap v-if="isLoadingActive" />
+        <loading v-if="isLoadingActive" />
         <keep-alive>
             <router-view />
         </keep-alive>
@@ -9,15 +9,15 @@
 </template>
 
 <script>
-    import Bootstrap from '../components/Bootstrap';
-    import Sidebar from '../components/Sidebar';
+    import Sidebar from './Sidebar';
+    import Loading from './Loading';
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
         name: 'App',
         components: {
-            Bootstrap,
             Sidebar,
+            Loading,
         },
         computed: {
             ...mapGetters('loading', {

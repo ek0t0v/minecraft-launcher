@@ -1,8 +1,8 @@
 <template>
-    <transition name="bootstrap-transition">
-        <div class="bootstrap">
-            <div class="bootstrap__overlay" />
-            <div class="bootstrap__content">
+    <transition name="loading-transition">
+        <div class="loading">
+            <div class="loading__overlay" />
+            <div class="loading__content">
                 {{ step }}
             </div>
         </div>
@@ -13,7 +13,7 @@
     import { mapGetters } from 'vuex';
 
     export default {
-        name: 'Bootstrap',
+        name: 'Loading',
         computed: {
             ...mapGetters('loading', {
                 step: 'step',
@@ -25,7 +25,7 @@
 <style lang="less" scoped>
     @import (reference) '../styles/style';
 
-    .bootstrap {
+    .loading {
 
         .flex(row, nowrap, center, center);
         width: 100%;
@@ -38,7 +38,7 @@
             width: 100%;
             height: 100%;
             position: relative;
-            background-image: url('../../../resources/img/bootstrap_background.png');
+            background-image: url('../../../resources/images/loading_background.png');
             background-size: cover;
             background-position-x: 50%;
             filter: blur(8px);
@@ -63,11 +63,11 @@
 
     }
 
-    .bootstrap-transition-enter-active, .bootstrap-transition-leave-active {
+    .loading-transition-enter-active, .loading-transition-leave-active {
         transition: opacity 1s;
     }
 
-    .bootstrap-transition-enter, .bootstrap-transition-leave-to {
+    .loading-transition-enter, .loading-transition-leave-to {
         opacity: 0;
     }
 </style>
