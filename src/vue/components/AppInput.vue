@@ -9,7 +9,10 @@
         <input
             type="text"
             class="app-input__input"
+            :value="localValue"
             :placeholder="placeholder"
+            @change="onChange"
+            @blur="onBlur"
         />
     </div>
 </template>
@@ -18,6 +21,10 @@
     export default {
         name: 'AppInput',
         props: {
+            value: {
+                type: String,
+                default: '',
+            },
             placeholder: {
                 type: String,
                 default: 'Placeholder',
@@ -25,6 +32,23 @@
             label: {
                 type: String,
                 default: null,
+            },
+        },
+        data() {
+            return {
+                localValue: this.value,
+            };
+        },
+        methods: {
+            onChange(e) {
+                this.localValue = e.target.value;
+            },
+            onBlur() {
+                if (this.value === this.localValue) {
+                    return;
+                }
+
+                this.$emit('on-blur', this.localValue);
             },
         },
     }

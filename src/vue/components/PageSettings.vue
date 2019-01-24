@@ -11,8 +11,10 @@
             />
             <app-input
                 class="settings__element"
+                :value="config.gameDirectory"
                 :label="$t('settings.element.gameDirectory.label')"
                 :placeholder="$t('settings.element.gameDirectory.placeholder')"
+                @on-blur="onBlurGameDirectoryInput"
             />
             <app-input
                 class="settings__element"
@@ -61,6 +63,12 @@
                 this.updateConfig({
                     key: 'locale',
                     value: payload.value,
+                });
+            },
+            onBlurGameDirectoryInput(directory) {
+                this.updateConfig({
+                    key: 'gameDirectory',
+                    value: directory,
                 });
             },
         },
