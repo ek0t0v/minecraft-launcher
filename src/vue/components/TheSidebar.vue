@@ -27,65 +27,85 @@
             />
             <app-select
                 class="sidebar-play__element"
-                :choices="versions"
-                :current="currentVersion"
+                :current="config.lastVersion"
                 :appears-from="'bottom'"
                 :placeholder="$t('play.version.placeholder')"
                 :is-loading="isVersionsLoading"
                 :is-disabled="isVersionsEmpty"
-                @on-select="onSelect"
-            />
+                :max-height="200"
+            >
+                <version-select-option
+                    v-for="(version, index) in versions"
+                    :key="index"
+                    :is-installed="version.isInstalled"
+                    @click.native="selectVersion(version)"
+                >
+                    {{ version.name }}
+                </version-select-option>
+            </app-select>
             <app-button
                 class="sidebar-play__element"
-                :is-disabled="isVersionsEmpty || !currentVersion"
+                :is-disabled="isVersionsEmpty"
                 @on-click="play"
             >
-                {{ $t('play.button') }}
+                {{ playButtonText }}
             </app-button>
         </div>
     </div>
 </template>
 
 <script>
-    import AppButton from '../components/AppButton';
-    import AppInput from '../components/AppInput';
-    import AppSelect from '../components/AppSelect';
+    import AppButton from '../components/App/AppButton';
+    import AppInput from '../components/App/AppInput';
+    import AppSelect from '../components/App/AppSelect';
     import { loadVersions } from '../commands/version';
     import { startGame } from '../commands/game';
     import { mapGetters, mapActions } from 'vuex';
+    import VersionSelectOption from './VersionSelectOption';
 
     export default {
         name: 'TheSidebar',
         components: {
+            VersionSelectOption,
             AppButton,
             AppInput,
             AppSelect,
         },
-        data() {
-            return {
-                currentVersion: null,
-            };
-        },
         computed: {
+            ...mapGetters('config', {
+                config: 'config',
+            }),
             ...mapGetters('version', {
                 isVersionsLoading: 'isVersionsLoading',
                 isVersionsEmpty: 'isVersionsEmpty',
                 versions: 'items',
             }),
+            playButtonText() {
+                if (!this.config.lastVersion || this.config.lastVersion.isInstalled) {
+                    return this.$t('play.button.play');
+                }
+
+                return this.$t('play.button.install');
+            },
         },
         created() {
-            this.startVersionsLoading();
+            this.showVersionsLoading();
             loadVersions();
         },
         methods: {
+            ...mapActions('config', {
+                setLastVersion: 'setLastVersion',
+            }),
             ...mapActions('version', {
-                startVersionsLoading: 'startLoading',
+                showVersionsLoading: 'startLoading',
             }),
             play() {
                 startGame();
             },
-            onSelect(item) {
-                this.currentVersion = item;
+            selectVersion(version) {
+                this.setLastVersion({
+                    version,
+                });
             },
         },
     }

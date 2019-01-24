@@ -25,7 +25,10 @@
             "label": "Версия",
             "placeholder": "Версия"
         },
-        "button": "Играть!"
+        "button": {
+            "play": "Играть!",
+            "install": "Установить и играть"
+        }
     },
     "settings": {
         "header": {

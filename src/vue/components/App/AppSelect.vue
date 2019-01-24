@@ -32,20 +32,14 @@
             <div
                 v-show="isMenuOpened"
                 class="app-select__menu"
+                :style="{ maxHeight: maxHeight + 'px' }"
                 :class="{
                     'app-select__menu--appears-from-top': appearsFrom === 'top',
                     'app-select__menu--appears-from-bottom': appearsFrom === 'bottom',
                     'app-select__menu--appears-from-top-with-label': appearsFrom === 'top' && label,
                 }"
             >
-                <div
-                    v-for="(choice, index) in choices"
-                    :key="index"
-                    class="app-select__menu-item"
-                    @click="select(index)"
-                >
-                    {{ choice.name }}
-                </div>
+                <slot />
             </div>
         </transition>
     </div>
@@ -60,10 +54,6 @@
             AppSpinner,
         },
         props: {
-            choices: {
-                type: Array,
-                default: () => [],
-            },
             current: {
                 type: Object,
                 default: null,
@@ -83,6 +73,11 @@
                     'top',
                     'bottom',
                 ].indexOf(v) > -1,
+            },
+            maxHeight: {
+                type: Number,
+                default: 128,
+                validator: v => v > 24 && v < 1024,
             },
             isLoading: Boolean,
             isDisabled: Boolean,
@@ -111,15 +106,12 @@
 
                 this.isMenuOpened = !this.isMenuOpened;
             },
-            select(index) {
-                this.$emit('on-select', this.choices[index]);
-            },
         },
     }
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../styles/style';
+    @import (reference) '../../styles/style';
 
     .app-select {
 
@@ -152,7 +144,7 @@
         &__input {
 
             .noselect; // todo: Текст все равно выделяется, поправить (видимо, из-за readonly).
-            .text-clip;
+            .text-clip; // todo: Сделать отступ под анимацию загрузки.
             .font(@classic__g__font, 15px, 600, @classic__select__input__color);
             width: 100%;
             padding: 10px 0;
@@ -178,11 +170,13 @@
         }
 
         &__menu {
+
             width: 100%;
             padding: 6px 0;
             background-color: @classic__select__menu__background-color;
             position: absolute;
             box-shadow: 0 0 0 1px rgba(0,0,0,.025), 0 4px 16px rgba(0,0,0,.15);
+            overflow-y: auto;
 
             &--appears-from-top-with-label {
                 top: 63px !important;
@@ -194,21 +188,6 @@
 
             &--appears-from-bottom {
                 bottom: 42px;
-            }
-
-        }
-
-        &__menu-item {
-
-            .text-clip;
-            .font(@classic__g__font, 13px, 400, @classic__select__input__color);
-            width: 100%;
-            padding: 6px 12px;
-            cursor: pointer;
-            box-sizing: border-box;
-
-            &:hover {
-                background-color: @classic__select__item__background-color--hover;
             }
 
         }

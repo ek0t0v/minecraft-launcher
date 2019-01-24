@@ -6,8 +6,8 @@
 </template>
 
 <script>
-    import AppPageHeader from '../components/AppPageHeader';
-    import AppPageContent from '../components/AppPageContent';
+    import AppPageHeader from '../App/AppPageHeader';
+    import AppPageContent from '../App/AppPageContent';
 
     export default {
         name: 'PageAbout',
@@ -19,5 +19,5 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../styles/style';
+    @import (reference) '../../styles/style';
 </style>

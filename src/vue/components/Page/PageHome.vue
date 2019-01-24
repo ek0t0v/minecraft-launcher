@@ -9,7 +9,7 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../styles/style';
+    @import (reference) '../../styles/style';
 
     .home {
         width: calc(100% - 240px);

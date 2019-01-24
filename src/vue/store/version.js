@@ -2,11 +2,8 @@ function initialState() {
     return {
         isVersionsLoading: false,
         items: [],
-        lastVersion: null,
     };
 }
-
-// todo: При установке версии запускать config:init, чтобы общий конфиг обновился.
 
 export default {
     namespaced: true,

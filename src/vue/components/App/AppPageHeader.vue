@@ -1,16 +1,16 @@
 <template>
-    <div class="page-header">
-        <div class="page-header-breadcrumbs">
+    <div class="app-page-header">
+        <div class="app-page-header-breadcrumbs">
             <router-link
-                class="page-header-breadcrumbs__item"
+                class="app-page-header-breadcrumbs__item"
                 to="home"
             >
-                <i class="sidebar-menu__icon fas fa-home" />
+                <i class="fas fa-home" />
             </router-link>
-            <div class="page-header-breadcrumbs__item">
+            <div class="app-page-header-breadcrumbs__item">
                 <i class="fas fa-arrow-right" />
             </div>
-            <span class="page-header-breadcrumbs__item">
+            <span class="app-page-header-breadcrumbs__item">
                 <slot />
             </span>
         </div>
@@ -24,15 +24,15 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../styles/style';
+    @import (reference) '../../styles/style';
 
-    .page-header {
+    .app-page-header {
         width: 100%;
         padding: 24px;
         box-sizing: border-box;
     }
 
-    .page-header-breadcrumbs {
+    .app-page-header-breadcrumbs {
 
         .flex(row, nowrap, flex-start, center);
 

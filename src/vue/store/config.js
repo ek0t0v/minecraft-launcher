@@ -6,6 +6,8 @@ function initialState() {
         theme: 'classic',
         sidebarPosition: 'right',
         gameDirectory: null,
+        lastVersion: null,
+        lastUser: null,
     };
 }
 
@@ -17,15 +19,36 @@ export default {
         locale: state => state.locale,
     },
     actions: {
-        init({ commit }, payload) {
+        init({ commit, dispatch }, payload) {
             commit('init', payload);
-            // todo: Положить установленные версии в version store.
+
+            dispatch('version/setItems', {
+                items: payload.config.installedVersions,
+            }, { root: true });
+
+            if (payload.config.lastVersion) {
+                dispatch('config/setLastVersion', {
+                    version: payload.config.lastVersion,
+                }, { root: true });
+            }
+
             // todo: Положить список юзеров в user store.
         },
         updateConfig({ commit }, payload) {
-            updateConfig(payload.key, payload.value);
+            if (payload.save || typeof payload.save === 'undefined') {
+                updateConfig(payload.key, payload.value);
+            }
 
             commit('updateConfig', payload);
+        },
+        setLastVersion({ dispatch }, payload) {
+            dispatch('config/updateConfig', {
+                key: 'lastVersion',
+                value: payload.version,
+                save: payload.version.isInstalled,
+            }, { root: true });
+
+            // todo: Не забыть помечать версию как lastVersion когда она будет установлена (с сохранением в storage).
         },
     },
     mutations: {
@@ -34,6 +57,9 @@ export default {
         },
         updateConfig(state, payload) {
             Object.assign(state, { [payload.key]: payload.value });
+        },
+        setLastVersion(state, payload) {
+            state.lastVersion = payload.version;
         },
         reset(state) {
             const s = initialState();

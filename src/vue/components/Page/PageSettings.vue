@@ -4,11 +4,17 @@
         <app-page-content class="settings">
             <app-select
                 class="settings__element"
-                :choices="$t('locales')"
-                :current="locale"
+                :current="currentLocale"
                 :label="$t('settings.element.locale.label')"
-                @on-select="selectLocale"
-            />
+            >
+                <app-select-option
+                    v-for="(locale, index) in $t('locales')"
+                    :key="index"
+                    @click.native="selectLocale(locale)"
+                >
+                    {{ locale.name }}
+                </app-select-option>
+            </app-select>
             <app-input
                 class="settings__element"
                 :value="config.gameDirectory"
@@ -31,15 +37,17 @@
 </template>
 
 <script>
-    import AppPageHeader from '../components/AppPageHeader';
-    import AppPageContent from '../components/AppPageContent';
-    import AppSelect from '../components/AppSelect';
+    import AppPageHeader from '../App/AppPageHeader';
+    import AppPageContent from '../App/AppPageContent';
+    import AppSelect from '../App/AppSelect';
+    import AppInput from '../App/AppInput';
     import { mapGetters, mapActions } from 'vuex';
-    import AppInput from '../components/AppInput';
+    import AppSelectOption from '../App/AppSelectOption';
 
     export default {
         name: 'PageSettings',
         components: {
+            AppSelectOption,
             AppInput,
             AppPageHeader,
             AppPageContent,
@@ -49,7 +57,7 @@
             ...mapGetters('config', {
                 config: 'config',
             }),
-            locale() {
+            currentLocale() {
                 return this.$t('locales').filter(locale => {
                     return locale.value === this.config.locale;
                 })[0];
@@ -76,7 +84,7 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../styles/style';
+    @import (reference) '../../styles/style';
 
     .settings {
 

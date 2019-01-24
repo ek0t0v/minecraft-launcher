@@ -25,7 +25,10 @@
             "label": "Version",
             "placeholder": "Version"
         },
-        "button": "Play!"
+        "button": {
+            "play": "Play!",
+            "install": "Install & play"
+        }
     },
     "settings": {
         "header": {

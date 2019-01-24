@@ -1,5 +1,5 @@
 <template>
-    <div class="page-content">
+    <div class="app-page-content">
         <slot />
     </div>
 </template>
@@ -11,9 +11,9 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../styles/style';
+    @import (reference) '../../styles/style';
 
-    .page-content {
+    .app-page-content {
         /*height: 1000px;*/
         /*overflow-y: auto;*/
         padding: 4px 24px 24px 24px;

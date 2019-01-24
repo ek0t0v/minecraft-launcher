@@ -1,6 +1,6 @@
 <template>
-    <div class="spinner">
-        <div class="spinner__wheel" />
+    <div class="app-spinner">
+        <div class="app-spinner__wheel" />
     </div>
 </template>
 
@@ -11,9 +11,9 @@
 </script>
 
 <style lang="less" scoped>
-    @import (reference) '../styles/style';
+    @import (reference) '../../styles/style';
 
-    .spinner {
+    .app-spinner {
 
         width: calc(100% - 4px);
         height: calc(100% - 4px);

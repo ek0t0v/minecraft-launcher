@@ -1,11 +1,8 @@
 function initialState() {
     return {
         items: [],
-        lastUser: null,
     };
 }
-
-// todo: При добавлении/обновлении/удалении юзеров запускать config:init, чтобы общий конфиг обновился.
 
 export default {
     namespaced: true,
