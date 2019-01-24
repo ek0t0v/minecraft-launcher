@@ -1,5 +1,6 @@
 @import 'common';
 @import 'mixins';
+@import 'transition';
 
 @background: #fff;
 
@@ -14,31 +15,4 @@ body {
 .page {
     width: calc(100% - 280px);
     margin: 0 280px 0 0;
-}
-
-.fade-enter-active, .fade-leave-active {
-    transition: all .1s ease-in-out;
-}
-
-.fade-enter-active {
-    animation: bounce-in .1s;
-}
-
-.bounce-leave-active {
-    animation: bounce-in .1s reverse;
-}
-
-.fade-enter, .fade-leave-to {
-    transform-origin: right 50% 0px;
-    transform: scale(.9) translateX(12px) translateY(-50%);
-    opacity: 0;
-}
-
-@keyframes bounce-in {
-    90% {
-        transform: scale(1.01) translateY(-50%);
-    }
-    100% {
-        transform: scale(1) translateY(-50%);
-    }
 }

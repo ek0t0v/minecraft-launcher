@@ -19,12 +19,14 @@
                 :placeholder="placeholder"
                 @click="openMenu"
             />
-            <div
-                v-if="isLoading"
-                class="app-select__loading-block"
-            >
-                <div class="app-select__loading"></div>
-            </div>
+            <transition name="fade">
+                <div
+                    v-if="isLoading"
+                    class="app-select__loading"
+                >
+                    <app-spinner />
+                </div>
+            </transition>
         </div>
         <transition :name="transitionName">
             <div
@@ -50,8 +52,13 @@
 </template>
 
 <script>
+    import AppSpinner from './AppSpinner';
+
     export default {
         name: 'AppSelect',
+        components: {
+            AppSpinner,
+        },
         props: {
             choices: {
                 type: Array,
@@ -118,11 +125,13 @@
 
         .flex(column, nowrap, flex-start, flex-start);
         position: relative;
-        transition: .1s all ease-in-out;
 
         &--disabled {
 
-            opacity: .5;
+            .app-select__label,
+            .app-select__input {
+                opacity: .25;
+            }
 
             .app-select__input {
                 cursor: default;
@@ -133,6 +142,7 @@
         &__label {
             .font(@classic__g__font, 12px, 400, @classic__select__label__color);
             margin: 0 0 6px 0;
+            transition: .1s opacity ease-in-out;
         }
 
         &__input-wrapper {
@@ -149,6 +159,7 @@
             border-bottom: 3px solid @classic__select__border__color;
             cursor: pointer;
             position: relative;
+            transition: .1s opacity ease-in-out;
 
             &::placeholder {
                 color: @classic__select__placeholder__color;
@@ -157,17 +168,12 @@
 
         }
 
-        &__loading-block {
-            width: 24px;
-            height: 24px;
-            background-color: #222222;
-            position: absolute;
-            top: 7.5px;
-            right: 0;
-        }
-
         &__loading {
-
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 9.5px;
+            right: 0;
         }
 
         &__menu {

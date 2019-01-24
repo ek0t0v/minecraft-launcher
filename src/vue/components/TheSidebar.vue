@@ -37,6 +37,7 @@
             />
             <app-button
                 class="sidebar-play__element"
+                :is-disabled="isVersionsEmpty || !currentVersion"
                 @on-click="play"
             >
                 {{ $t('play.button') }}
@@ -62,7 +63,7 @@
         },
         data() {
             return {
-                currentVersion: {},
+                currentVersion: null,
             };
         },
         computed: {

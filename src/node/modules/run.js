@@ -34,9 +34,7 @@ module.exports = function run() {
 
     initWindow();
 
-    require('vue-devtools').install();
-
-    // if (process.env.NODE_ENV === 'development') {
-    //     require('vue-devtools').install();
-    // }
+    if (process.env.NODE_ENV === 'development') {
+        require('vue-devtools').install();
+    }
 };
