@@ -54,7 +54,7 @@
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
-        name: 'Sidebar',
+        name: 'TheSidebar',
         components: {
             AppButton,
             AppInput,

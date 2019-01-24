@@ -1,7 +1,7 @@
 <template>
     <div class="page">
-        <page-header>{{ $t('settings.header.title') }}</page-header>
-        <page-content class="settings">
+        <app-page-header>{{ $t('settings.header.title') }}</app-page-header>
+        <app-page-content class="settings">
             <app-select
                 class="settings__element"
                 :choices="$t('locales')"
@@ -24,23 +24,23 @@
                 :label="$t('settings.element.minecraftArgs.label')"
                 :placeholder="$t('settings.element.minecraftArgs.placeholder')"
             />
-        </page-content>
+        </app-page-content>
     </div>
 </template>
 
 <script>
-    import PageHeader from '../components/PageHeader';
-    import PageContent from '../components/PageContent';
+    import AppPageHeader from '../components/AppPageHeader';
+    import AppPageContent from '../components/AppPageContent';
     import AppSelect from '../components/AppSelect';
     import { mapGetters, mapActions } from 'vuex';
     import AppInput from '../components/AppInput';
 
     export default {
-        name: 'Settings',
+        name: 'PageSettings',
         components: {
             AppInput,
-            PageHeader,
-            PageContent,
+            AppPageHeader,
+            AppPageContent,
             AppSelect,
         },
         computed: {

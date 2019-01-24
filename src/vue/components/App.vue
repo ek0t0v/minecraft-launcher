@@ -1,29 +1,29 @@
 <template>
     <div class="app">
-        <locale-changer />
-        <loading v-if="isLoadingActive">
+        <the-locale-changer />
+        <the-loading v-if="isLoadingActive">
             {{ loadingStep.name }}
-        </loading>
+        </the-loading>
         <keep-alive>
             <router-view />
         </keep-alive>
-        <sidebar />
+        <the-sidebar />
     </div>
 </template>
 
 <script>
-    import Sidebar from './Sidebar';
-    import Loading from './Loading';
-    import LocaleChanger from './LocaleChanger';
+    import TheSidebar from './TheSidebar';
+    import TheLocaleChanger from './TheLocaleChanger';
+    import TheLoading from './TheLoading';
     import { mapGetters } from 'vuex';
     import { loadConfig } from '../commands/config';
 
     export default {
         name: 'App',
         components: {
-            Sidebar,
-            Loading,
-            LocaleChanger,
+            TheSidebar,
+            TheLoading,
+            TheLocaleChanger,
         },
         computed: {
             ...mapGetters('loading', {
