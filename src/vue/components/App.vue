@@ -16,6 +16,7 @@
     import Loading from './Loading';
     import LocaleChanger from './LocaleChanger';
     import { mapGetters } from 'vuex';
+    import { loadConfig } from '../commands/config';
 
     export default {
         name: 'App',
@@ -29,6 +30,9 @@
                 isLoadingActive: 'active',
                 loadingStep: 'step',
             }),
+        },
+        created() {
+            loadConfig();
         },
     }
 </script>

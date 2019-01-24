@@ -47,6 +47,7 @@
     import AppButton from '../components/AppButton';
     import AppInput from '../components/AppInput';
     import AppSelect from '../components/AppSelect';
+    import { loadVersions } from '../commands/version';
 
     export default {
         name: 'Sidebar',
@@ -101,6 +102,9 @@
                     },
                 ];
             },
+        },
+        created() {
+            loadVersions();
         },
         methods: {
             play() {},

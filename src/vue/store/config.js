@@ -27,7 +27,7 @@ export default {
     },
     mutations: {
         init(state, payload) {
-            Object.assign(state, payload);
+            Object.assign(state, payload.config);
         },
         updateConfig(state, payload) {
             Object.assign(state, { [payload.key]: payload.value });

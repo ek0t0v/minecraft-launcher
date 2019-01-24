@@ -25,6 +25,7 @@
         height: 100vh;
         overflow: hidden;
         z-index: 1000;
+        opacity: .5;
 
         &__overlay {
 

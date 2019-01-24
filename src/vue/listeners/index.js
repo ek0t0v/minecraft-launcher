@@ -1,2 +1,2 @@
-import './bootstrap';
 import './config';
+import './version';
