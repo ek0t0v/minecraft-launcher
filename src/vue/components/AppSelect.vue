@@ -151,6 +151,7 @@
 
         &__input {
 
+            .noselect; // todo: Текст все равно выделяется, поправить (видимо, из-за readonly).
             .text-clip;
             .font(@classic__g__font, 15px, 600, @classic__select__input__color);
             width: 100%;

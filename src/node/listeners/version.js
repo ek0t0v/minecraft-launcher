@@ -77,6 +77,8 @@ ipc.on('versions:load', () => {
 ipc.on('version:install', () => {
     // todo: Need to implement.
 
+    // https://github.com/seniorcote/vue-tags-component/archive/master.zip
+
     sendMessageToRenderer('version:installed');
 });
 

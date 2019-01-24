@@ -5,6 +5,7 @@ function initialState() {
         locale: 'en',
         theme: 'classic',
         sidebarPosition: 'right',
+        gameDirectory: null,
     };
 }
 

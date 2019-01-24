@@ -35,8 +35,8 @@
             "locale": {
                 "label": "Language"
             },
-            "versionsDirectory": {
-                "label": "Directory",
+            "gameDirectory": {
+                "label": "Game directory",
                 "placeholder": "/home/cote/.minecraft"
             },
             "jvmArgs": {

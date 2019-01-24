@@ -2,7 +2,7 @@ const ipc = require('electron').ipcMain;
 const sendMessageToRenderer = require('../modules/sendMessageToRenderer');
 const storage = require('electron-json-storage-sync');
 const deepmerge = require('deepmerge');
-const defaultConfig = require('./config');
+const defaultConfig = require('../../../resources/config');
 
 ipc.on('config:load', () => {
     let currentConfig = storage.get('config');

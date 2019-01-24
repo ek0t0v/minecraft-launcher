@@ -1,9 +1,11 @@
 const { BrowserWindow } = require('electron');
 const storage = require('electron-json-storage-sync');
-const defaultConfig = require('../config');
+const defaultConfig = require('../../../resources/config');
 
 function initConfig() {
     if (!storage.get('config').status) {
+        // todo: Определить и записать директорию игры.
+
         const result = storage.set('config', defaultConfig);
 
         if (!result.status) {

@@ -35,8 +35,8 @@
             "locale": {
                 "label": "Язык"
             },
-            "versionsDirectory": {
-                "label": "Директория",
+            "gameDirectory": {
+                "label": "Директория игры",
                 "placeholder": "/home/cote/.minecraft"
             },
             "jvmArgs": {

@@ -1,6 +1,7 @@
 function initialState() {
     return {
         items: [],
+        lastUser: null,
     };
 }
 

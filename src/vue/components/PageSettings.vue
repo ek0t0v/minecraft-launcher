@@ -11,8 +11,8 @@
             />
             <app-input
                 class="settings__element"
-                :label="$t('settings.element.versionsDirectory.label')"
-                :placeholder="$t('settings.element.versionsDirectory.placeholder')"
+                :label="$t('settings.element.gameDirectory.label')"
+                :placeholder="$t('settings.element.gameDirectory.placeholder')"
             />
             <app-input
                 class="settings__element"

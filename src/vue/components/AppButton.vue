@@ -18,6 +18,10 @@
         },
         methods: {
             onClick() {
+                if (this.isDisabled) {
+                    return;
+                }
+
                 this.$emit('on-click');
             },
         },
