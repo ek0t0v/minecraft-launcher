@@ -27,10 +27,12 @@
             />
             <app-select
                 class="sidebar-play__element"
-                :choices="choices"
+                :choices="versions"
                 :current="currentVersion"
                 :appears-from="'bottom'"
                 :placeholder="$t('play.version.placeholder')"
+                :is-loading="isVersionsLoading"
+                :is-disabled="isVersionsEmpty"
                 @on-select="onSelect"
             />
             <app-button
@@ -48,6 +50,8 @@
     import AppInput from '../components/AppInput';
     import AppSelect from '../components/AppSelect';
     import { loadVersions } from '../commands/version';
+    import { startGame } from '../commands/game';
+    import { mapGetters, mapActions } from 'vuex';
 
     export default {
         name: 'Sidebar',
@@ -62,52 +66,23 @@
             };
         },
         computed: {
-            choices() {
-                return [
-                    {
-                        name: 'Lotmine',
-                        value: '0',
-                    },
-                    {
-                        name: 'ForsCraft МиниИгры 1.8-1.12.2',
-                        value: '1',
-                    },
-                    {
-                        name: 'MineLegacy 1.8-1.13.2 Survival',
-                        value: '2',
-                    },
-                    {
-                        name: 'NexusCraft 1.8-1.13.2',
-                        value: '3',
-                    },
-                    {
-                        name: 'LuckyWorld PVP 1.8-1.12.2',
-                        value: '4',
-                    },
-                    {
-                        name: 'BattleCraft 1.12.2',
-                        value: '5',
-                    },
-                    {
-                        name: 'SuperMine NoDupe 1.8-1.12.2',
-                        value: '6',
-                    },
-                    {
-                        name: 'MineBars - NoDupe-PvP-Games',
-                        value: '7',
-                    },
-                    {
-                        name: 'McSkill.ru - МНОГО МОДОВ',
-                        value: '8',
-                    },
-                ];
-            },
+            ...mapGetters('version', {
+                isVersionsLoading: 'isVersionsLoading',
+                isVersionsEmpty: 'isVersionsEmpty',
+                versions: 'items',
+            }),
         },
         created() {
+            this.startVersionsLoading();
             loadVersions();
         },
         methods: {
-            play() {},
+            ...mapActions('version', {
+                startVersionsLoading: 'startLoading',
+            }),
+            play() {
+                startGame();
+            },
             onSelect(item) {
                 this.currentVersion = item;
             },

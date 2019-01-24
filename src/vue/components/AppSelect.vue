@@ -1,20 +1,31 @@
 <template>
-    <div class="app-select">
+    <div
+        class="app-select"
+        :class="{ 'app-select--disabled': isDisabled }"
+    >
         <label
             v-if="label"
             class="app-select__label"
         >
             {{ label }}
         </label>
-        <input
-            class="app-select__input"
-            :class="'app-select__input--' + menuUniqueClass"
-            type="text"
-            readonly
-            :value="current ? current.name : null"
-            :placeholder="placeholder"
-            @click="isMenuOpened = !isMenuOpened"
-        />
+        <div class="app-select__input-wrapper">
+            <input
+                class="app-select__input"
+                :class="'app-select__input--' + menuUniqueClass"
+                type="text"
+                readonly
+                :value="current ? current.name : null"
+                :placeholder="placeholder"
+                @click="openMenu"
+            />
+            <div
+                v-if="isLoading"
+                class="app-select__loading-block"
+            >
+                <div class="app-select__loading"></div>
+            </div>
+        </div>
         <transition :name="transitionName">
             <div
                 v-show="isMenuOpened"
@@ -66,6 +77,8 @@
                     'bottom',
                 ].indexOf(v) > -1,
             },
+            isLoading: Boolean,
+            isDisabled: Boolean,
         },
         data() {
             return {
@@ -84,11 +97,17 @@
             });
         },
         methods: {
+            openMenu() {
+                if (this.isDisabled) {
+                    return;
+                }
+
+                this.isMenuOpened = !this.isMenuOpened;
+            },
             select(index) {
                 this.$emit('on-select', this.choices[index]);
             },
         },
-
     }
 </script>
 
@@ -99,10 +118,25 @@
 
         .flex(column, nowrap, flex-start, flex-start);
         position: relative;
+        transition: .1s all ease-in-out;
+
+        &--disabled {
+
+            opacity: .5;
+
+            .app-select__input {
+                cursor: default;
+            }
+
+        }
 
         &__label {
             .font(@classic__g__font, 12px, 400, @classic__select__label__color);
             margin: 0 0 6px 0;
+        }
+
+        &__input-wrapper {
+            width: 100%;
         }
 
         &__input {
@@ -114,11 +148,25 @@
             box-sizing: border-box;
             border-bottom: 3px solid @classic__select__border__color;
             cursor: pointer;
+            position: relative;
 
             &::placeholder {
                 color: @classic__select__placeholder__color;
                 font-weight: 400;
             }
+
+        }
+
+        &__loading-block {
+            width: 24px;
+            height: 24px;
+            background-color: #222222;
+            position: absolute;
+            top: 7.5px;
+            right: 0;
+        }
+
+        &__loading {
 
         }
 

@@ -18,6 +18,8 @@ export default {
     actions: {
         init({ commit }, payload) {
             commit('init', payload);
+            // todo: Положить установленные версии в version store.
+            // todo: Положить список юзеров в user store.
         },
         updateConfig({ commit }, payload) {
             updateConfig(payload.key, payload.value);

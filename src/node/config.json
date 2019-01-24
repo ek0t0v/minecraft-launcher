@@ -3,5 +3,8 @@
     "height": 600,
     "theme": "classic",
     "sidebarPosition": "right",
-    "locale": "en"
+    "locale": "en",
+    "installedVersions": [],
+    "selectedVersion": null,
+    "selectedUser": null
 }
