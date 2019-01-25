@@ -2,4 +2,6 @@
 /dist
 /releases
 /.idea
+/resources/jre
+/logs
 npm-debug.log
