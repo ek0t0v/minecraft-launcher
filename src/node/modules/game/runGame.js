@@ -1,15 +1,30 @@
 const { app } = require('electron');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
+const sendMessageToRenderer = require('../modules/util/sendMessageToRenderer');
 
 /**
  * Запускает игру.
  *
- * @param version
+ * @param versionId
+ * @param userId
  *
  * @returns {Promise<void>}
  */
-module.exports = async function runGame(version) {
+module.exports = async function runGame(versionId, userId) {
+    // проверяем, установлен ли JRE и правилен ли он (ОС, разрядность)
+    if (!await require('../java/checkJava')()) {
+        // если что-то не так, загружаем правильный JRE в папку лаунчера
+        await require('../java/downloadJava')();
+    }
+
+    // проверяем, установлен ли клиент для этой версии
+    // если нет, загружаем
+    // когда клиент установлен - записываем версию в конфиг (поле lastVersion)
+    // сверяем файлы на сервере и клиенте
+    // сворачиваем лаунчер и запускаем игру
+
+    const version = '1.13.2'; // нужно достать по versionId
     const javaPath = app.getPath('appData').concat('/Launcher/jre/jre-8u201-linux-x64/bin/java');
     const gameDir = '/home/cote/.minecraft';
     const librariesDir = `${ gameDir }/libraries`;
@@ -72,4 +87,6 @@ module.exports = async function runGame(version) {
 
     console.log('stdout:', stdout);
     console.log('stderr:', stderr);
+
+    sendMessageToRenderer('game:started');
 };

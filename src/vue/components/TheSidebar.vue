@@ -100,7 +100,7 @@
                 showVersionsLoading: 'startLoading',
             }),
             play() {
-                startGame();
+                startGame(this.config.lastVersion.id);
             },
             selectVersion(version) {
                 this.setLastVersion({
