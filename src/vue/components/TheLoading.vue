@@ -1,17 +1,23 @@
 <template>
     <transition name="loading-transition">
         <div class="loading">
-            <div class="loading__overlay" />
             <div class="loading__content">
-                <slot />
+                {{ step }}
             </div>
         </div>
     </transition>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
         name: 'TheLoading',
+        computed: {
+            ...mapGetters('loading', {
+                step: 'step',
+            }),
+        },
     }
 </script>
 
@@ -21,8 +27,8 @@
     .loading {
 
         .flex(row, nowrap, center, center);
-        width: 100%;
-        height: 100vh;
+        /*width: 100%;*/
+        /*height: 100vh;*/
         overflow: hidden;
         z-index: 1000;
         opacity: .5;
@@ -52,7 +58,7 @@
 
         &__content {
             position: absolute;
-            color: #fff;
+            color: #222;
         }
 
     }

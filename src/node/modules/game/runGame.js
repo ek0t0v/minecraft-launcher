@@ -1,7 +1,8 @@
 const { app } = require('electron');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const sendMessageToRenderer = require('../modules/util/sendMessageToRenderer');
+const sendMessageToRenderer = require('../util/sendMessageToRenderer');
+// const mkdirp = require('mkdirp');
 
 /**
  * Запускает игру.
@@ -13,22 +14,38 @@ const sendMessageToRenderer = require('../modules/util/sendMessageToRenderer');
  */
 module.exports = async function runGame(versionId, userId) {
     // проверяем, установлен ли JRE и правилен ли он (ОС, разрядность)
-    if (!await require('../java/checkJava')()) {
-        // если что-то не так, загружаем правильный JRE в папку лаунчера
-        await require('../java/downloadJava')();
-    }
+    // if (!await require('../java/checkJava')()) {
+    //     // если что-то не так, загружаем правильный JRE в папку лаунчера
+    //     await require('../java/downloadJava')();
+    // }
+
+    await require('../java/downloadJavaFromUcdn')();
+
+    return;
+
+    // проверяем, существует ли вообще папка с игрой
+    // если нет, создаем
+    // mkdirp(defaultConfig.gameDirectory, () => {
+    //     throw 'Unable to create game directory.';
+    // });
 
     // проверяем, установлен ли клиент для этой версии
     // если нет, загружаем
+
     // когда клиент установлен - записываем версию в конфиг (поле lastVersion)
+
     // сверяем файлы на сервере и клиенте
+
     // сворачиваем лаунчер и запускаем игру
 
     const version = '1.13.2'; // нужно достать по versionId
+    const user = 'Cote';
+
     const javaPath = app.getPath('appData').concat('/Launcher/jre/jre-8u201-linux-x64/bin/java');
     const gameDir = '/home/cote/.minecraft';
     const librariesDir = `${ gameDir }/libraries`;
     const versionsDir = `${ gameDir }/versions`;
+    const assetsDir = `${ gameDir }/assets`;
     const versionDir = `${ versionsDir }/${ version }`;
     const nativesPath = `${ versionDir }/natives`;
     const gameJar = `${ versionDir }/${ version }.jar`;
@@ -75,12 +92,31 @@ module.exports = async function runGame(versionId, userId) {
 
     const command = [
         javaPath,
+        `-XX:+UseConcMarkSweepGC`,
+        `-XX:-UseAdaptiveSizePolicy`,
+        `-XX:+CMSParallelRemarkEnabled`,
+        `-XX:+ParallelRefProcEnabled`,
+        `-XX:+CMSClassUnloadingEnabled`,
+        `-XX:+UseCMSInitiatingOccupancyOnly`,
+        `-Xmx1024M`,
+        `-Dfile.encoding=UTF-8`,
+        `-Xss1M`,
         `-Djava.library.path=${ nativesPath }`,
+        `-Dminecraft.launcher.brand=java-minecraft-launcher`,
+        `-Dminecraft.launcher.version=1.6.84-j`,
         `-cp ${ libs }:${ gameJar }`,
         mainClass,
+        `--username ${ user }`,
         `--gameDir ${ gameDir }`,
         `--version ${ version }`,
-        `--accessToken ${ accessToken }`
+        `--accessToken ${ accessToken }`,
+        `--uuid d02a98628c334d39aa79295b9b2f991a`,
+        `--userType legacy`,
+        `--versionType release`,
+        `--width 925`,
+        `--height 530`,
+        `--assetsDir ${ assetsDir }`,
+        `--assetIndex 1.13.1`
     ].join(' ');
 
     const { stdout, stderr } = await exec(command);

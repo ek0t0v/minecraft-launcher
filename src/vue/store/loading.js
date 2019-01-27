@@ -1,6 +1,6 @@
 function initialState() {
     return {
-        active: false,
+        active: true,
         step: {
             name: null,
             progress: 0,

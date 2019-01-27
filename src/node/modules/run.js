@@ -2,16 +2,10 @@ const { app, BrowserWindow } = require('electron');
 const storage = require('electron-json-storage-sync');
 const defaultConfig = require('../../../resources/config');
 const path = require('path');
-// const mkdirp = require('mkdirp');
 
 function initConfig() {
     if (!storage.get('config').status) {
-        defaultConfig.gameDirectory = app.getPath('home').concat(path.sep).concat('.minecraft');
-
-        // todo: Создавать папку (если ее нет) будем при попытке запуска игры.
-        // mkdirp(defaultConfig.gameDirectory, () => {
-        //     throw 'Unable to create game directory.';
-        // });
+        defaultConfig.gameDir = app.getPath('home').concat(path.sep).concat('.minecraft');
 
         const result = storage.set('config', defaultConfig);
 

@@ -7,6 +7,8 @@ const exec = util.promisify(require('child_process').exec);
  * @returns {Promise<void>}
  */
 module.exports = async function checkJava() {
+    return false;
+
     const { stdout, stderr } = await exec('java -version');
     console.log('stdout:', stdout);
     console.log('stderr:', stderr);
