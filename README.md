@@ -56,4 +56,5 @@
 
 ## Notes
 
+https://wiki.vg/Game_files
 https://launchermeta.mojang.com/mc/game/version_manifest.json
