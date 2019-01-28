@@ -2,15 +2,15 @@
 
 ## Установка и запуск
 
-- `npm install & npm run build` установить зависимости и собрать приложение
-- `npm start` запустить приложение
+- `docker-compose run node npm install & docker-compose run node npm run build` установить зависимости и собрать приложение
+- `docker-compose run node npm start` запустить приложение
 
 ## Сборка
 
-- `npm run package` сборка под все платформы
-- `npm run package-windows` сборка под Windows
-- `npm run package-linux` сборка под Linux
-- `npm run package-mac` сборка под Mac
+- `docker-compose run node npm run package` сборка под все платформы
+- `docker-compose run node npm run package-windows` сборка под Windows
+- `docker-compose run node npm run package-linux` сборка под Linux
+- `docker-compose run node npm run package-mac` сборка под Mac
 
 ## API версий
 
