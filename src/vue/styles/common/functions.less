@@ -1,7 +1,7 @@
 .font-face(@name, @src, @weight) {
     @font-face {
         font-family: @name;
-        src: local(@src) format('opentype');
+        src: url(@src) format('opentype');
         font-weight: @weight;
         font-style: normal;
     }
