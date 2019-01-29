@@ -45,7 +45,7 @@
             </app-select>
             <app-button
                 class="sidebar-play__element"
-                :is-disabled="isVersionsEmpty"
+                :is-disabled="isVersionsEmpty || !config.lastVersion"
                 @on-click="play"
             >
                 {{ playButtonText }}
