@@ -38,7 +38,7 @@
             width: 100%;
             height: 100%;
             position: relative;
-            background-image: url('../../../resources/images/loading_background.png');
+            background-image: url('../../resources/images/loading_background.png');
             background-size: cover;
             background-position-x: 50%;
             filter: blur(8px);

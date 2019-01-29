@@ -55,9 +55,9 @@
 </template>
 
 <script>
-    import AppButton from '../components/App/AppButton';
-    import AppInput from '../components/App/AppInput';
-    import AppSelect from '../components/App/AppSelect';
+    import AppButton from './App/AppButton';
+    import AppInput from './App/AppInput';
+    import AppSelect from './App/AppSelect';
     import { loadVersions } from '../commands/version';
     import { startGame } from '../commands/game';
     import { mapGetters, mapActions } from 'vuex';

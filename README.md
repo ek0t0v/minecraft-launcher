@@ -2,7 +2,7 @@
 
 ## Установка и запуск
 
-- `docker-compose run node npm install & docker-compose run node npm run build` установить зависимости и собрать приложение
+- `docker-compose run node npm install && docker-compose run node npm run build` установить зависимости и собрать приложение
 - `docker-compose run node npm start` запустить приложение
 
 ## Сборка

@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const storage = require('electron-json-storage-sync');
-const defaultConfig = require('../../../resources/config');
+const defaultConfig = require('../../resources/config');
 const path = require('path');
 
 function initConfig() {

@@ -4,7 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/vue/index.js',
+    entry: './renderer/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: 'dist/',
