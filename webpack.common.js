@@ -45,11 +45,16 @@ module.exports = {
             },
             {
                 test: /\.(ttf|eot|woff|woff2|svg)(\?[\s\S]+)?$/,
-                use: 'file-loader?name=./fonts/[hash].[ext]',
+                use: 'file-loader?name=./fonts/[name].[ext]',
             },
+            // {
+            //     test: /\.(woff|woff2|eot|ttf|svg)$/,
+            //     exclude: /node_modules/,
+            //     loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
+            // },
             {
                 test: /\.(jpg|jpeg|png|gif)(\?[\s\S]+)?$/,
-                use: 'file-loader?name=./images/[hash].[ext]',
+                use: 'file-loader?name=./images/[name].[ext]',
             },
         ],
     },

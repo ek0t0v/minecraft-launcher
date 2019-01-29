@@ -4,11 +4,11 @@ services:
   node:
     build: docker/node
     user: 1000:1000
-    working_dir: /app
     volumes:
-      - $HOME/.Xauthority:/home/node/.Xauthority
       - ./:/app
-      - ./app:/home/node/.config/Launcher
+      - $HOME/.Xauthority:/home/node/.Xauthority
+      - ./docker/config:/home/node/.config/Launcher
+    working_dir: /app
     environment:
       DISPLAY: $DISPLAY
-    network_mode: "host"
+    network_mode: host

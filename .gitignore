@@ -1,8 +1,11 @@
+/.env
 /node_modules
 /dist
 /releases
 /.idea
 /resources/jre
 /logs
-/app
 npm-debug.log
+!/docker/config
+/docker/config/*
+!docker/config/.gitkeep
