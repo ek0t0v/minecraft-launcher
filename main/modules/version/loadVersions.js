@@ -3,7 +3,7 @@ const isVersionInstalled = require('./isVersionInstalled');
 const VERSIONS_API_URL = 'https://my-json-server.typicode.com/seniorcote/test-api/versions';
 
 /**
- * Загружает и возвращает список версий с сервера.
+ * @returns {Promise<*>}
  */
 module.exports = async function loadVersions() {
     const response = await fetch(VERSIONS_API_URL);

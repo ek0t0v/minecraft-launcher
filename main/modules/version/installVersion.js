@@ -1,6 +1,4 @@
 /**
- * Устанавливает выбранную версию.
- *
  * @param version
  *
  * @returns {Promise<*>}

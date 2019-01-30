@@ -1,6 +1,4 @@
 /**
- * Удаляет версию.
- *
  * @param version
  *
  * @returns {Promise<*>}

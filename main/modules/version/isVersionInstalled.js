@@ -1,6 +1,4 @@
 /**
- * Проверяет, установлена ли версия.
- *
  * @param version
  *
  * @returns {boolean}

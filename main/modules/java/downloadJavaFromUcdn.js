@@ -5,6 +5,7 @@ const path = require('path');
 const request = require('request');
 const decompress = require('targz').decompress;
 const sendMessageToRenderer = require('../util/sendMessageToRenderer');
+const EventEmitter = require('events');
 
 const jreVersions = {
     linux: {
@@ -32,6 +33,7 @@ module.exports = async function downloadJavaFromUcdn() {
     const stream = fs.createWriteStream(uploadDir.concat(path.sep).concat(file));
 
     const size = await require('../util/getContentLength')(downloadUrl);
+
 
     console.log(size);
 

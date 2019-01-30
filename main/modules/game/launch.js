@@ -1,8 +1,42 @@
+'use strict';
+
 const { app } = require('electron');
+const os = require('os');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const constants = require('../constants');
 const sendMessageToRenderer = require('../util/sendMessageToRenderer');
+const UrlDownloader = require('../util/UrlDownloader');
+
+const jreVersions = {
+    linux: {
+        x32: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-linux-i586.tar.gz',
+        x64: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-linux-x64.tar.gz',
+    },
+    win32: {
+        x32: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-windows-i586.tar.gz',
+        x64: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-windows-x64.tar.gz',
+    },
+    darwin: {
+        x64: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-macosx-x64.tar.gz',
+    },
+};
+
+function downloadJava(percents, step, initialProgress) {
+    return new Promise((resolve, reject) => {
+        let downloader = new UrlDownloader();
+
+        downloader.download(jreVersions[os.platform()][os.arch()], app.getPath('userData'));
+        downloader.on('progress', progress => {
+            sendMessageToRenderer('launch:progress', {
+                step: step,
+                progress: Math.floor(initialProgress + percents * progress / 100),
+            });
+        });
+        downloader.on('end', resolve);
+        downloader.on('error', reject);
+    });
+}
 
 function runLaunchTestLoop(checkpoints, index) {
     if (checkpoints.length === index) {
@@ -12,13 +46,19 @@ function runLaunchTestLoop(checkpoints, index) {
         return;
     }
 
-    setTimeout(() => {
+    setTimeout(async () => {
         let i = 0;
 
         sendMessageToRenderer('launch:progress', {
             step: checkpoints[index][0],
             progress: checkpoints[index][1],
         });
+
+        if (checkpoints[index][0] === 'JAVA_CHECKED') {
+            let percents = checkpoints[index + 1][1] - checkpoints[index][1];
+
+            await downloadJava(percents, checkpoints[index][0], checkpoints[index][1]);
+        }
 
         i++;
 
@@ -42,9 +82,8 @@ module.exports = async function launch(versionId, userId, options) {
     global.isLaunching = true;
 
     sendMessageToRenderer('launch:started');
-    runLaunchTestLoop(Object.entries(constants.launchCheckpoints), 0);
 
-    return;
+    return runLaunchTestLoop(Object.entries(constants.launchCheckpoints), 0);
 
     // todo: Записывать lastVersion в конфиг, когда версия игры установлена.
 

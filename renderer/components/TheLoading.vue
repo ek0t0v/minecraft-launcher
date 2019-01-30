@@ -25,7 +25,6 @@
         name: 'TheLoading',
         computed: {
             ...mapGetters('loading', {
-                isActive: 'isActive',
                 step: 'step',
                 progress: 'progress',
             }),
