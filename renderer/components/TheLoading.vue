@@ -1,11 +1,21 @@
 <template>
-    <transition name="loading-transition">
-        <div class="loading">
-            <div class="loading__content">
-                {{ step }}
+    <div class="loading">
+        <div
+            class="loading__bar"
+            :style="{ width: progressWithPercent }"
+        />
+        <div class="loading__content">
+            <div class="loading__content-block loading__content-block--left">
+                <span class="loading__text loading__text--step">{{ step }}</span>
+            </div>
+            <div class="loading__content-block loading__content-block--center">
+                <span class="loading__text loading__text--progress">{{ progressWithPercent }}</span>
+            </div>
+            <div class="loading__content-block loading__content-block--right">
+                <span class="loading__text loading__text"></span>
             </div>
         </div>
-    </transition>
+    </div>
 </template>
 
 <script>
@@ -15,8 +25,13 @@
         name: 'TheLoading',
         computed: {
             ...mapGetters('loading', {
+                isActive: 'isActive',
                 step: 'step',
+                progress: 'progress',
             }),
+            progressWithPercent() {
+                return this.progress + '%';
+            },
         },
     }
 </script>
@@ -27,47 +42,60 @@
     .loading {
 
         .flex(row, nowrap, center, center);
-        /*width: 100%;*/
-        /*height: 100vh;*/
+        width: 100%;
+        height: @classic__loading__height;
+        background-color: @classic__loading__background-color;
         overflow: hidden;
-        z-index: 1000;
-        opacity: .5;
+        z-index: 1;
 
-        &__overlay {
-
+        &__content {
+            .flex(row, nowrap, space-between, center);
             width: 100%;
-            height: 100%;
-            position: relative;
-            background-image: url('../../resources/images/loading_background.png');
-            background-size: cover;
-            background-position-x: 50%;
-            filter: blur(8px);
-            transform: scale(1.1);
+            padding: 0 16px;
+            z-index: 1;
+        }
 
-            &:after {
-                content: '';
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                position: absolute;
-                background-color: rgba(0,0,0,.75);
+        &__content-block {
+
+            &--left,
+            &--right {
+                width: calc((100% - 32px - 16px - 16px - 48px) / 2);
+            }
+
+            &--left {
+                .flex(row, nowrap, flex-start, center);
+            }
+
+            &--right {
+                .flex(row, nowrap, flex-end, center);
+            }
+
+            &--center {
+                .flex(row, nowrap, center, center);
+                width: 48px;
             }
 
         }
 
-        &__content {
-            position: absolute;
-            color: #222;
+        &__text {
+
+            .font(@classic__g__font, 14px, 400, #fff);
+
+            &--progress {
+                font-size: 15px;
+                font-weight: 700;
+            }
+
         }
 
-    }
+        &__bar {
+            width: 0;
+            height: @classic__loading__height;
+            background-color: @classic__loading__progress-bar__background-color;
+            transition: .1s width ease-in-out;
+            position: absolute;
+            left: 0;
+        }
 
-    .loading-transition-enter-active, .loading-transition-leave-active {
-        transition: opacity 1s;
-    }
-
-    .loading-transition-enter, .loading-transition-leave-to {
-        opacity: 0;
     }
 </style>

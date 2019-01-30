@@ -1,12 +1,12 @@
 const { app } = require('electron');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
+const constants = require('../constants');
 const sendMessageToRenderer = require('../util/sendMessageToRenderer');
-// const mkdirp = require('mkdirp');
 
-function runGameLoop(checkpoints, index) {
+function runLaunchTestLoop(checkpoints, index) {
     if (checkpoints.length === index) {
-        sendMessageToRenderer('game:started');
+        sendMessageToRenderer('launch:done');
         global.isLaunching = false;
 
         return;
@@ -15,7 +15,7 @@ function runGameLoop(checkpoints, index) {
     setTimeout(() => {
         let i = 0;
 
-        sendMessageToRenderer('game:start:progress', {
+        sendMessageToRenderer('launch:progress', {
             step: checkpoints[index][0],
             progress: checkpoints[index][1],
         });
@@ -23,69 +23,30 @@ function runGameLoop(checkpoints, index) {
         i++;
 
         if (i < checkpoints[index][1]) {
-            runGameLoop(checkpoints, ++index);
+            runLaunchTestLoop(checkpoints, ++index);
         }
     }, checkpoints[index][1] * 10)
 }
 
 /**
- * Запускает игру.
- *
  * @param versionId
  * @param userId
  *
  * @returns {Promise<void>}
  */
-module.exports = async function launchGame(versionId, userId, options) {
+module.exports = async function launch(versionId, userId, options) {
     if (global.isLaunching) {
         return;
     }
 
     global.isLaunching = true;
-    // проверяем, установлен ли JRE и правилен ли он (ОС, разрядность)
-    // if (!await require('../java/checkJava')()) {
-    //     // если что-то не так, загружаем правильный JRE в папку лаунчера
-    //     await require('../java/downloadJava')();
-    // }
 
-    // оценка длительности запуска (нужно для прогресс-бара)
-    // для быстрых действий захардкодим вес (например, сборка команды запуска и запуск - 5%)
-    // для загрузок jre и версий высчитываем вес файлов через заголовки content-length
-    // [сколько загруженных кб/мб приходится на 1%] = [вес всех файлов] / (100% - [веса быстрых действий])
-
-    const constants = require('../constants');
-
-    sendMessageToRenderer('game:start:started');
-    runGameLoop(Object.entries(constants.runGameLoadingCheckpoints), 0);
-
-
-    // Object.entries(constants.runGameLoadingCheckpoints).forEach(checkpoint => {
-    //     console.log(checkpoint[1]);
-    // });
-
-    // веса для прогресс-бара
-    // чтение какого-либо конфига = 2%
-    // распаковка = 5%
-    //
-
-    // await require('../java/downloadJavaFromUcdn')();
+    sendMessageToRenderer('launch:started');
+    runLaunchTestLoop(Object.entries(constants.launchCheckpoints), 0);
 
     return;
 
-    // проверяем, существует ли вообще папка с игрой
-    // если нет, создаем
-    // mkdirp(defaultConfig.gameDirectory, () => {
-    //     throw 'Unable to create game directory.';
-    // });
-
-    // проверяем, установлен ли клиент для этой версии
-    // если нет, загружаем
-
-    // когда клиент установлен - записываем версию в конфиг (поле lastVersion)
-
-    // сверяем файлы на сервере и клиенте
-
-    // сворачиваем лаунчер и запускаем игру
+    // todo: Записывать lastVersion в конфиг, когда версия игры установлена.
 
     const version = '1.13.2'; // нужно достать по versionId
     const user = 'Cote';

@@ -3,6 +3,7 @@
     "height": 600,
     "theme": "classic",
     "sidebarPosition": "right",
+    "loadingPosition": "top",
     "gameDir": null,
     "locale": "en",
     "installedVersions": [],

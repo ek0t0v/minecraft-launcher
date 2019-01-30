@@ -21,6 +21,7 @@ function initWindow() {
         height: defaultConfig.height,
     });
 
+    window.setResizable(false);
     window.on('closed', () => window = null);
     window.loadFile('index.html');
 

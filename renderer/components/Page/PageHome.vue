@@ -1,5 +1,5 @@
 <template>
-    <div class="home"></div>
+    <div class="page"></div>
 </template>
 
 <script>
@@ -10,9 +10,4 @@
 
 <style lang="less" scoped>
     @import (reference) '../../styles/style';
-
-    .home {
-        width: calc(100% - 240px);
-        margin: 0 240px 0 0;
-    }
 </style>

@@ -1,7 +1,12 @@
 const tar = require('tar');
 const fs = require('fs');
 
-module.exports = function getTarGzInfo(path) {
+/**
+ * @param path
+ *
+ * @returns {Promise<any>}
+ */
+module.exports = function getFileListFromTar(path) {
     const info = {
         numberOfFiles: 0,
         files: [],

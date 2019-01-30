@@ -1,10 +1,8 @@
 function initialState() {
     return {
-        active: true,
-        step: {
-            name: null,
-            progress: 0,
-        },
+        isActive: false,
+        step: null,
+        progress: 0,
     };
 }
 
@@ -12,16 +10,20 @@ export default {
     namespaced: true,
     state: initialState,
     getters: {
-        active: state => state.active,
+        isActive: state => state.isActive,
         step: state => state.step,
+        progress: state => state.progress,
     },
     actions: {
         start({ commit }) {
             commit('start');
         },
         stop({ commit }) {
-            commit('reset');
             commit('stop');
+
+            // Таймаут нужен потому что прогресс-бар появляется/исчезает с
+            // анимацией. Пользователь не должен видеть сброс значений.
+            setTimeout(() => commit('reset'), 150);
         },
         setStep({ commit }, payload) {
             commit('setStep', payload);
@@ -29,13 +31,14 @@ export default {
     },
     mutations: {
         start(state) {
-            state.active = true;
+            state.isActive = true;
         },
         stop(state) {
-            state.active = false;
+            state.isActive = false;
         },
         setStep(state, payload) {
-            state.step = payload;
+            state.step = payload.step;
+            state.progress = payload.progress;
         },
         reset(state) {
             const s = initialState();

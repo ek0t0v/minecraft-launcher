@@ -8,11 +8,37 @@
                 :label="$t('settings.element.locale.label')"
             >
                 <app-select-option
-                    v-for="(locale, index) in $t('locales')"
+                    v-for="(locale, index) in $t('settings.element.locale.options')"
                     :key="index"
                     @click.native="selectLocale(locale)"
                 >
                     {{ locale.name }}
+                </app-select-option>
+            </app-select>
+            <app-select
+                class="settings__element"
+                :current="currentSidebarPosition"
+                :label="$t('settings.element.sidebarPosition.label')"
+            >
+                <app-select-option
+                    v-for="(position, index) in $t('settings.element.sidebarPosition.options')"
+                    :key="index"
+                    @click.native="selectSidebarPosition(position)"
+                >
+                    {{ position.name }}
+                </app-select-option>
+            </app-select>
+            <app-select
+                class="settings__element"
+                :current="currentLoadingPosition"
+                :label="$t('settings.element.loadingPosition.label')"
+            >
+                <app-select-option
+                    v-for="(position, index) in $t('settings.element.loadingPosition.options')"
+                    :key="index"
+                    @click.native="selectLoadingPosition(position)"
+                >
+                    {{ position.name }}
                 </app-select-option>
             </app-select>
             <app-input
@@ -58,8 +84,18 @@
                 config: 'config',
             }),
             currentLocale() {
-                return this.$t('locales').filter(locale => {
+                return this.$t('settings.element.locale.options').filter(locale => {
                     return locale.value === this.config.locale;
+                })[0];
+            },
+            currentSidebarPosition() {
+                return this.$t('settings.element.sidebarPosition.options').filter(position => {
+                    return position.value === this.config.sidebarPosition;
+                })[0];
+            },
+            currentLoadingPosition() {
+                return this.$t('settings.element.loadingPosition.options').filter(position => {
+                    return position.value === this.config.loadingPosition;
                 })[0];
             },
         },
@@ -72,6 +108,18 @@
                     key: 'locale',
                     value: payload.value,
                 });
+            },
+            selectSidebarPosition(payload) {
+                this.updateConfig({
+                    key: 'sidebarPosition',
+                    value: payload.value,
+                })
+            },
+            selectLoadingPosition(payload) {
+                this.updateConfig({
+                    key: 'loadingPosition',
+                    value: payload.value,
+                })
             },
             onBlurGameDirectoryInput(directory) {
                 this.updateConfig({

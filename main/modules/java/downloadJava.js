@@ -7,20 +7,6 @@ const sendMessageToRenderer = require('../util/sendMessageToRenderer');
 
 const jreVersions = {
     linux: {
-        x32: 'https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jre-8u201-linux-i586.tar.gz',
-        x64: 'https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jre-8u201-linux-x64.tar.gz',
-    },
-    win32: {
-        x32: 'https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jre-8u201-windows-i586.tar.gz',
-        x64: 'https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jre-8u201-windows-x64.tar.gz',
-    },
-    darwin: {
-        x64: 'https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jre-8u201-macosx-x64.tar.gz',
-    },
-};
-
-const jreFromCdn = {
-    linux: {
         x32: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-linux-i586.tar.gz',
         x64: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-linux-x64.tar.gz',
     },

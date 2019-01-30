@@ -177,6 +177,7 @@
             position: absolute;
             box-shadow: 0 0 0 1px rgba(0,0,0,.025), 0 4px 16px rgba(0,0,0,.15);
             overflow-y: auto;
+            z-index: 100;
 
             &--appears-from-top-with-label {
                 top: 63px !important;

@@ -1,5 +1,5 @@
 const ipc = require('ipc');
 
-export function startGame(versionId, userId) {
-    ipc.send('game:start', { versionId, userId });
+export function launch(versionId, userId) {
+    ipc.send('launch:start', { versionId, userId });
 }

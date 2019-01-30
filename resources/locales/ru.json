@@ -6,16 +6,6 @@
             "loadVersions": "Загрузка списка версий..."
         }
     },
-    "locales": [
-        {
-            "name": "English",
-            "value": "en"
-        },
-        {
-            "name": "Русский",
-            "value": "ru"
-        }
-    ],
     "play": {
         "nickname": {
             "label": "Ник",
@@ -36,7 +26,43 @@
         },
         "element": {
             "locale": {
-                "label": "Язык"
+                "label": "Язык",
+                "options": [
+                    {
+                        "name": "English",
+                        "value": "en"
+                    },
+                    {
+                        "name": "Русский",
+                        "value": "ru"
+                    }
+                ]
+            },
+            "sidebarPosition": {
+                "label": "Расположение сайдбара",
+                "options": [
+                    {
+                        "name": "Справа",
+                        "value": "right"
+                    },
+                    {
+                        "name": "Слева",
+                        "value": "left"
+                    }
+                ]
+            },
+            "loadingPosition": {
+                "label": "Расположение полосы загрузки",
+                "options": [
+                    {
+                        "name": "Сверху",
+                        "value": "top"
+                    },
+                    {
+                        "name": "Снизу",
+                        "value": "bottom"
+                    }
+                ]
             },
             "gameDirectory": {
                 "label": "Директория игры",

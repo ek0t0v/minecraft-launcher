@@ -27,21 +27,13 @@ const jreVersions = {
  */
 module.exports = async function downloadJavaFromUcdn() {
     const downloadUrl = jreVersions[os.platform()][os.arch()];
-
-    const uploadDir = '/home/cote';
+    const uploadDir = app.getPath('userData');
     const file = downloadUrl.substr(downloadUrl.lastIndexOf('/') + 1);
     const stream = fs.createWriteStream(uploadDir.concat(path.sep).concat(file));
 
-    const jrePath = uploadDir.concat(path.sep).concat('jre1.8.0_201');
+    const size = await require('../util/getContentLength')(downloadUrl);
 
-    request({
-        url: downloadUrl,
-        method: 'HEAD',
-    }, function(err, response, body) {
-        console.log(app.getPath('userData')); // /home/cote/.config/Launcher
-        console.log(response.headers['content-length']);
-        process.exit(0);
-    });
+    console.log(size);
 
     return;
 

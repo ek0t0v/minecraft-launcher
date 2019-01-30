@@ -59,7 +59,7 @@
     import AppInput from './App/AppInput';
     import AppSelect from './App/AppSelect';
     import { loadVersions } from '../commands/version';
-    import { startGame } from '../commands/game';
+    import { launch } from '../commands/game';
     import { mapGetters, mapActions } from 'vuex';
     import VersionSelectOption from './VersionSelectOption';
 
@@ -100,7 +100,7 @@
                 showVersionsLoading: 'startLoading',
             }),
             play() {
-                startGame(this.config.lastVersion.id);
+                launch(this.config.lastVersion.id);
             },
             selectVersion(version) {
                 this.setLastVersion({
@@ -116,13 +116,10 @@
 
     .sidebar {
         .flex(column, nowrap, space-between, flex-start);
-        width: 280px;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         padding: 24px;
         box-sizing: border-box;
-        position: fixed;
-        top: 0;
-        right: 0;
         background-color: #E8F7F4;
     }
 

@@ -6,16 +6,6 @@
             "loadVersions": "Load versions..."
         }
     },
-    "locales": [
-        {
-            "name": "English",
-            "value": "en"
-        },
-        {
-            "name": "Русский",
-            "value": "ru"
-        }
-    ],
     "play": {
         "nickname": {
             "label": "Nickname",
@@ -36,7 +26,43 @@
         },
         "element": {
             "locale": {
-                "label": "Language"
+                "label": "Language",
+                "options": [
+                    {
+                        "name": "English",
+                        "value": "en"
+                    },
+                    {
+                        "name": "Русский",
+                        "value": "ru"
+                    }
+                ]
+            },
+            "sidebarPosition": {
+                "label": "Sidebar position",
+                "options": [
+                    {
+                        "name": "Right",
+                        "value": "right"
+                    },
+                    {
+                        "name": "Left",
+                        "value": "left"
+                    }
+                ]
+            },
+            "loadingPosition": {
+                "label": "Loading bar position",
+                "options": [
+                    {
+                        "name": "Top",
+                        "value": "top"
+                    },
+                    {
+                        "name": "Bottom",
+                        "value": "bottom"
+                    }
+                ]
             },
             "gameDirectory": {
                 "label": "Game directory",
