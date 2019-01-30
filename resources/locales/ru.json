@@ -1,11 +1,4 @@
 {
-    "bootstrap": {
-        "step": {
-            "loadConfig": "Загрузка настроек...",
-            "checkJava": "Проверка наличия Java...",
-            "loadVersions": "Загрузка списка версий..."
-        }
-    },
     "play": {
         "nickname": {
             "label": "Ник",
@@ -35,6 +28,10 @@
                     {
                         "name": "Русский",
                         "value": "ru"
+                    },
+                    {
+                        "name": "Українська",
+                        "value": "uk"
                     }
                 ]
             },

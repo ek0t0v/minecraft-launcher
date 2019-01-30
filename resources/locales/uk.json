@@ -1,25 +1,25 @@
 {
     "play": {
         "nickname": {
-            "label": "Nickname",
-            "placeholder": "Nickname"
+            "label": "Нік",
+            "placeholder": "Нік"
         },
         "version": {
-            "label": "Version",
-            "placeholder": "Version"
+            "label": "Версія",
+            "placeholder": "Версія"
         },
         "button": {
-            "play": "Play!",
-            "install": "Install & play"
+            "play": "Грати!",
+            "install": "Встановити і грати"
         }
     },
     "settings": {
         "header": {
-            "title": "Settings"
+            "title": "Налаштування"
         },
         "element": {
             "locale": {
-                "label": "Language",
+                "label": "Мова",
                 "options": [
                     {
                         "name": "English",
@@ -36,53 +36,53 @@
                 ]
             },
             "sidebarPosition": {
-                "label": "Sidebar position",
+                "label": "Розташування бічній панелі",
                 "options": [
                     {
-                        "name": "Right",
+                        "name": "Справа",
                         "value": "right"
                     },
                     {
-                        "name": "Left",
+                        "name": "Зліва",
                         "value": "left"
                     }
                 ]
             },
             "loadingPosition": {
-                "label": "Loading bar position",
+                "label": "Розташування смуги завантаження",
                 "options": [
                     {
-                        "name": "Top",
+                        "name": "Зверху",
                         "value": "top"
                     },
                     {
-                        "name": "Bottom",
+                        "name": "Знизу",
                         "value": "bottom"
                     }
                 ]
             },
             "gameDirectory": {
-                "label": "Game directory",
+                "label": "Директорія гри",
                 "placeholder": "/home/cote/.minecraft"
             },
             "jvmArgs": {
-                "label": "JVM arguments",
+                "label": "Аргументи JVM",
                 "placeholder": "-XX:MaxPermSize=256M"
             },
             "minecraftArgs": {
-                "label": "Minecraft arguments",
+                "label": "Аргументи Minecraft",
                 "placeholder": "--server 127.0.0.1"
             }
         }
     },
     "accounts": {
         "header": {
-            "title": "Accounts"
+            "title": "Акаунти"
         }
     },
     "about": {
         "header": {
-            "title": "About"
+            "title": "Про лаунчер"
         }
     }
 }
