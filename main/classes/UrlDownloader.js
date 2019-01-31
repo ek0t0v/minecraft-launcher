@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const EventEmitter = require('events').EventEmitter;
 const request = require('request');
-const getContentLength = require('../util/getContentLength');
+const getContentLength = require('../modules/util/getContentLength');
 
 module.exports = class UrlDownloader extends EventEmitter {
     download(url, dest) {

@@ -1,5 +1,5 @@
 const { app } = require('electron');
-const run = require('./main/modules/run');
+const run = require('./main/run');
 
 // todo: На windows похоже не грузятся шрифты, поправить.
 

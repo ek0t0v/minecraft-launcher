@@ -2,7 +2,7 @@
 
 const { app, BrowserWindow } = require('electron');
 const storage = require('electron-json-storage-sync');
-const defaultConfig = require('../../resources/config');
+const defaultConfig = require('../resources/config');
 const path = require('path');
 
 function initConfig() {
@@ -25,18 +25,7 @@ function initWindow() {
         titleBarStyle: 'hidden',
     });
 
-    // window.webContents.openDevTools();
     window.setResizable(false);
-    // window.center();
-    // window.setMaximizable(false);
-    // window.setFullScreenable(false);
-    // window.minimize();
-    //
-    // window.once('ready-to-show', () => {
-    //     window.show();
-    // });
-    //
-    // window.show();
     window.on('closed', () => window = null);
     window.loadFile('index.html');
 
@@ -46,7 +35,7 @@ function initWindow() {
 module.exports = function run() {
     initConfig();
 
-    require('../listeners');
+    require('./listeners');
 
     initWindow();
 

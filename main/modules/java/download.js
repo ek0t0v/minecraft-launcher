@@ -1,7 +1,7 @@
 'use strict';
 
 const os = require('os');
-const constants = require('../constants');
+const constants = require('../../constants');
 const UrlDownloader = require('../../classes/UrlDownloader');
 const sendMessageToRenderer = require('../util/sendMessageToRenderer');
 const trans = require('../util/trans');

@@ -1,6 +1,6 @@
 'use strict';
 
-const constants = require('../constants');
+const constants = require('../../constants');
 const sendMessageToRenderer = require('../util/sendMessageToRenderer');
 const trans = require('../util/trans');
 const isJavaInstalled = require('../java/isInstalled');
