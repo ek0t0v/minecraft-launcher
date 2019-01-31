@@ -1,3 +1,5 @@
+'use strict';
+
 const electron = require('electron');
 
 module.exports = function sendMessageToRenderer(message, payload) {

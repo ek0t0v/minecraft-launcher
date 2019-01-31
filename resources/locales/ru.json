@@ -84,5 +84,17 @@
         "header": {
             "title": "О лаунчере"
         }
+    },
+    "launchCheckpoint": {
+        "checkJava": "Проверка наличия Java...",
+        "downloadJava": "Загрузка Java...",
+        "unpackJava": "Распаковка...",
+        "checkVersion": "Проверка наличия версии...",
+        "downloadClient": "Загрузка клиента...",
+        "unpackClient": "Распаковка...",
+        "checkAssets": "Проверка ресурсов...",
+        "downloadAssets": "Загрузка ресурсов",
+        "checkClientChecksum": "Проверка клиента...",
+        "run": "Запуск игры..."
     }
 }

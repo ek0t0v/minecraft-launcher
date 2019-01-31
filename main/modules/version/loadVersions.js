@@ -1,3 +1,5 @@
+'use strict';
+
 const fetch = require('node-fetch');
 const isVersionInstalled = require('./isVersionInstalled');
 const VERSIONS_API_URL = 'https://my-json-server.typicode.com/seniorcote/test-api/versions';

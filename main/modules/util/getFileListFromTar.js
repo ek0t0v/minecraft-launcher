@@ -1,3 +1,5 @@
+'use strict';
+
 const tar = require('tar');
 const fs = require('fs');
 

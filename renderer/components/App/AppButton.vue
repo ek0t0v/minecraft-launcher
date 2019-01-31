@@ -36,7 +36,7 @@
         .flex(row, nowrap, center, center);
         padding: 10px 16px;
         background-color: @classic__button__background-color;
-        border-radius: 3px;
+        /*border-radius: 3px;*/
         cursor: pointer;
         transition: .1s all ease-in-out;
 

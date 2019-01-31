@@ -1,3 +1,5 @@
+'use strict';
+
 const ipc = require('electron').ipcMain;
 const sendMessageToRenderer = require('../modules/util/sendMessageToRenderer');
 

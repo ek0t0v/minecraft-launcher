@@ -1,3 +1,5 @@
+'use strict';
+
 const { app, BrowserWindow } = require('electron');
 const storage = require('electron-json-storage-sync');
 const defaultConfig = require('../../resources/config');
@@ -19,9 +21,22 @@ function initWindow() {
     let window = new BrowserWindow({
         width: defaultConfig.width,
         height: defaultConfig.height,
+        frame: false,
+        titleBarStyle: 'hidden',
     });
 
+    // window.webContents.openDevTools();
     window.setResizable(false);
+    // window.center();
+    // window.setMaximizable(false);
+    // window.setFullScreenable(false);
+    // window.minimize();
+    //
+    // window.once('ready-to-show', () => {
+    //     window.show();
+    // });
+    //
+    // window.show();
     window.on('closed', () => window = null);
     window.loadFile('index.html');
 

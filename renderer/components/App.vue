@@ -1,5 +1,6 @@
 <template>
     <div class="app">
+        <the-window-header />
         <the-locale-changer />
         <div
             class="app__loading"
@@ -32,6 +33,7 @@
     import TheLoading from './TheLoading';
     import TheSidebar from './TheSidebar';
     import TheLocaleChanger from './TheLocaleChanger';
+    import TheWindowHeader from './TheWindowHeader';
     import { mapGetters } from 'vuex';
     import { loadConfig } from '../commands/config';
 
@@ -41,6 +43,7 @@
             TheSidebar,
             TheLoading,
             TheLocaleChanger,
+            TheWindowHeader,
         },
         computed: {
             ...mapGetters('loading', {
@@ -71,7 +74,7 @@
             width: 100%;
             height: @classic__loading__height;
             position: absolute;
-            top: 0;
+            top: @classic__window-header__height;
 
             &--bottom {
                 top: unset;
@@ -84,16 +87,17 @@
 
             .flex(column, nowrap, flex-start, center);
             width: 100%;
-            height: 100vh;
+            height: calc(100vh - @classic__window-header__height);
             background-color: #fff;
             position: fixed;
+            top: @classic__window-header__height;
             z-index: 2;
             transition:
                 .1s height ease-in-out,
                 .1s margin ease-in-out;
 
             &--is-loading-active {
-                height: calc(100vh - @classic__loading__height);
+                height: calc(100vh - @classic__window-header__height - @classic__loading__height);
                 margin-top: @classic__loading__height;
             }
 

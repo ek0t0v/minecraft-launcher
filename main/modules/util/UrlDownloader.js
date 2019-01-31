@@ -8,23 +8,20 @@ const getContentLength = require('../util/getContentLength');
 
 module.exports = class UrlDownloader extends EventEmitter {
     download(url, dest) {
+        if (!fs.existsSync(dest)){
+            fs.mkdirSync(dest);
+        }
+
         getContentLength(url)
             .then(size => {
-                const stream = fs.createWriteStream(dest.concat(path.sep).concat('file.tar.gz'));
+                const stream = fs.createWriteStream(dest.concat(path.sep).concat(url.substr(url.lastIndexOf('/') + 1)));
 
                 let downloadedBytes = 0;
                 let bytesInPercent = Math.floor(size / 100);
                 let progress = 0;
 
                 request
-                    .get({
-                        url: url,
-                        rejectUnauthorized: false,
-                        agent: false,
-                        headers: {
-                            connection: 'keep-alive',
-                        },
-                    })
+                    .get(url)
                     .on('data', chunk => {
                         downloadedBytes += chunk.length;
 
@@ -33,19 +30,19 @@ module.exports = class UrlDownloader extends EventEmitter {
                         if (currentProgress !== progress) {
                             progress = currentProgress;
 
-                            this.emit('progress', progress);
+                            this.emit('progress', {
+                                progress: progress,
+                                size: size,
+                                downloaded: downloadedBytes,
+                            });
                         }
                     })
-                    .on('error', error => {
-                        this.emit('error', error);
-                    })
+                    .on('error', e => { throw e })
                     .on('end', () => {
                         this.emit('end');
                     })
                     .pipe(stream);
             })
-            .catch(e => {
-                console.log('Загрузка не удалась');
-            });
+            .catch(e => { throw e });
     }
 };

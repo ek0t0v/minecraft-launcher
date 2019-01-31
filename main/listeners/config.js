@@ -1,3 +1,5 @@
+'use strict';
+
 const ipc = require('electron').ipcMain;
 
 ipc.on('config:load', () => {

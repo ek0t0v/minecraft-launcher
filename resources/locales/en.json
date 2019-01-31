@@ -84,5 +84,17 @@
         "header": {
             "title": "About"
         }
+    },
+    "launchCheckpoint": {
+        "checkJava": "Java check...",
+        "downloadJava": "Java download...",
+        "unpackJava": "Unpacking...",
+        "checkVersion": "Version check...",
+        "downloadClient": "Client download...",
+        "unpackClient": "Unpacking...",
+        "checkAssets": "Check assets...",
+        "downloadAssets": "Assets download...",
+        "checkClientChecksum": "Client check...",
+        "run": "Running game..."
     }
 }
