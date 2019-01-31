@@ -1,77 +1,11 @@
 'use strict';
 
-const { app } = require('electron');
-const os = require('os');
-const path = require('path');
 const constants = require('../constants');
 const sendMessageToRenderer = require('../util/sendMessageToRenderer');
-const UrlDownloader = require('../util/UrlDownloader');
 const trans = require('../util/trans');
-
-/**
- * @param percents
- * @param step
- * @param initialProgress
- *
- * @returns {Promise<any>}
- */
-function downloadJava(percents, step, initialProgress) {
-    return new Promise((resolve, reject) => {
-        let javaDownloadUrl = constants.jreVersions[os.platform()][os.arch()];
-        let javaDestDir = app.getPath('userData').concat(path.sep).concat('tmp');
-        let downloader = new UrlDownloader();
-
-        downloader.download(javaDownloadUrl, javaDestDir);
-        downloader.on('progress', data => {
-            let downloaded = (data.downloaded / 1024).toFixed(2);
-            let size = (data.size / 1024).toFixed(2);
-
-            sendMessageToRenderer('launch:progress', {
-                step: `${trans(step)} (${downloaded} / ${size})`,
-                progress: Math.floor(initialProgress + percents * data.progress / 100),
-            });
-        });
-        downloader.on('end', () => resolve(javaDestDir));
-        downloader.on('error', () => reject);
-    });
-}
-
-/**
- * @param checkpoints
- * @param index
- *
- * @returns {Promise<any>}
- */
-function runLaunchTestLoop(checkpoints, index) {
-    return new Promise(resolve => {
-        if (checkpoints.length === index) {
-            resolve();
-        }
-
-        setTimeout(async () => {
-            let i = 0;
-
-            sendMessageToRenderer('launch:progress', {
-                step: trans(checkpoints[index][1].translation),
-                progress: checkpoints[index][1].doneOn,
-            });
-
-            if (checkpoints[index][0] === 'CHECK_JAVA') {
-                let percents = checkpoints[index + 1][1].doneOn - checkpoints[index][1].doneOn;
-
-                await downloadJava(percents, checkpoints[index + 1][1].translation, checkpoints[index][1].doneOn);
-            }
-
-            i++;
-
-            if (i < checkpoints[index][1].doneOn) {
-                await runLaunchTestLoop(checkpoints, ++index);
-
-                resolve();
-            }
-        }, checkpoints[index][1].doneOn * 10);
-    });
-}
+const isJavaInstalled = require('../java/isInstalled');
+const downloadJava = require('../java/download');
+const unpackTar = require('../util/unpackTar');
 
 /**
  * @param versionId
@@ -88,11 +22,40 @@ module.exports = async function launch(versionId, userId, options) {
 
     sendMessageToRenderer('launch:started');
 
-    // чекаем джаву
+    let progress = 0;
 
-    // загружаем джаву
+    sendMessageToRenderer('launch:progress', {
+        step: trans(constants.launchCheckpoints.CHECK_JAVA.message),
+        progress,
+    });
+    const javaInstallNeeded = !isJavaInstalled();
 
-    // распаковываем джаву
+    progress += constants.launchCheckpoints.CHECK_JAVA.duration;
+
+    if (javaInstallNeeded) {
+        sendMessageToRenderer('launch:progress', {
+            step: trans(constants.launchCheckpoints.DOWNLOAD_JAVA.message),
+            progress,
+        });
+        const javaTarPath = await downloadJava(
+            constants.launchCheckpoints.DOWNLOAD_JAVA.duration,
+            constants.launchCheckpoints.DOWNLOAD_JAVA.message,
+            progress,
+        );
+
+        progress += constants.launchCheckpoints.DOWNLOAD_JAVA.duration;
+
+        sendMessageToRenderer('launch:progress', {
+            step: trans(constants.launchCheckpoints.UNPACK_JAVA.message),
+            progress,
+        });
+        await unpackTar(javaTarPath, constants.path.java);
+
+        progress += constants.launchCheckpoints.UNPACK_JAVA.duration;
+    } else {
+        progress += constants.launchCheckpoints.DOWNLOAD_JAVA.duration;
+        progress += constants.launchCheckpoints.UNPACK_JAVA.duration;
+    }
 
     // чекаем версию
 
@@ -109,8 +72,6 @@ module.exports = async function launch(versionId, userId, options) {
     // проверяем что с клиентом все ок (контрольная сумма и т.п.)
 
     // запускаем игру
-
-    await runLaunchTestLoop(Object.entries(constants.launchCheckpoints), 0);
 
     sendMessageToRenderer('launch:done');
 

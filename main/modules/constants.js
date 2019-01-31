@@ -1,49 +1,58 @@
 'use strict';
 
+const { app } = require('electron');
+const path = require('path');
+
 module.exports = Object.freeze({
+    path: {
+        java: app.getPath('userData').concat(path.sep).concat('java'),
+        assets: app.getPath('userData').concat(path.sep).concat('assets'),
+        versions: app.getPath('userData').concat(path.sep).concat('versions'),
+        tmp: app.getPath('userData').concat(path.sep).concat('tmp'),
+    },
     launchCheckpoints: {
         CHECK_JAVA: {
-            doneOn: 2,
-            translation: 'launchCheckpoint.checkJava',
+            message: 'launchCheckpoint.checkJava',
+            duration: 2,
         },
         DOWNLOAD_JAVA: {
-            doneOn: 22,
-            translation: 'launchCheckpoint.downloadJava',
+            message: 'launchCheckpoint.downloadJava',
+            duration: 20,
         },
         UNPACK_JAVA: {
-            doneOn: 27,
-            translation: 'launchCheckpoint.unpackJava',
+            message: 'launchCheckpoint.unpackJava',
+            duration: 5,
         },
         CHECK_VERSION: {
-            doneOn: 29,
-            translation: 'launchCheckpoint.checkVersion',
+            message: 'launchCheckpoint.checkVersion',
+            duration: 2,
         },
         DOWNLOAD_CLIENT: {
-            doneOn: 49,
-            translation: 'launchCheckpoint.downloadClient',
+            message: 'launchCheckpoint.downloadClient',
+            duration: 20,
         },
         UNPACK_CLIENT: {
-            doneOn: 54,
-            translation: 'launchCheckpoint.unpackClient',
+            message: 'launchCheckpoint.unpackClient',
+            duration: 5,
         },
         CHECK_ASSETS: {
-            doneOn: 59,
-            translation: 'launchCheckpoint.checkAssets',
+            message: 'launchCheckpoint.checkAssets',
+            duration: 5,
         },
         DOWNLOAD_ASSETS: {
-            doneOn: 94,
-            translation: 'launchCheckpoint.downloadAssets',
+            message: 'launchCheckpoint.downloadAssets',
+            duration: 35,
         },
         CHECK_CLIENT_CHECKSUM: {
-            doneOn: 98,
-            translation: 'launchCheckpoint.checkClientChecksum',
+            message: 'launchCheckpoint.checkClientChecksum',
+            duration: 4,
         },
         RUN: {
-            doneOn: 100,
-            translation: 'launchCheckpoint.run',
+            message: 'launchCheckpoint.run',
+            duration: 2,
         },
     },
-    jreVersions: {
+    javaVersions: {
         linux: {
             x32: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-linux-i586.tar.gz',
             x64: 'http://5-187-10790-3.b.cdn12.com/jre/jre-8u201-linux-x64.tar.gz',
