@@ -1,5 +1,20 @@
 'use strict';
 
-module.exports = function unpackTar(src, dest) {
+const fs = require('fs');
+const tar = require('tar');
 
+module.exports = function unpackTar(src, dest) {
+    return new Promise((resolve, reject) => {
+        if (!fs.existsSync(dest)) {
+            fs.mkdirSync(dest);
+        }
+
+        tar.x({
+            file: src,
+            cwd: dest,
+            strict: true,
+        })
+            .then(() => resolve())
+            .catch(e => { throw e });
+    });
 };

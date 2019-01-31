@@ -10,6 +10,7 @@ const unpackTar = require('../util/unpackTar');
 /**
  * @param versionId
  * @param userId
+ * @param options
  *
  * @returns {Promise<void>}
  */
@@ -28,7 +29,7 @@ module.exports = async function launch(versionId, userId, options) {
         step: trans(constants.launchCheckpoints.CHECK_JAVA.message),
         progress,
     });
-    const javaInstallNeeded = !isJavaInstalled();
+    const javaInstallNeeded = !await isJavaInstalled();
 
     progress += constants.launchCheckpoints.CHECK_JAVA.duration;
 
@@ -42,6 +43,8 @@ module.exports = async function launch(versionId, userId, options) {
             constants.launchCheckpoints.DOWNLOAD_JAVA.message,
             progress,
         );
+
+        console.log(javaTarPath);
 
         progress += constants.launchCheckpoints.DOWNLOAD_JAVA.duration;
 

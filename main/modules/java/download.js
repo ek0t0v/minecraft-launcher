@@ -15,11 +15,9 @@ const trans = require('../util/trans');
  */
 module.exports = function download(progressDuration, progressMessage, initialProgress) {
     return new Promise((resolve, reject) => {
-        let javaDownloadUrl = constants.javaVersions[os.platform()][os.arch()];
-        let javaDestDir = constants.path.tmp;
         let downloader = new UrlDownloader();
 
-        downloader.download(javaDownloadUrl, javaDestDir);
+        downloader.download(constants.javaVersions[os.platform()][os.arch()].url, constants.path.tmp);
         downloader.on('progress', data => {
             let downloaded = (data.downloaded / 1024).toFixed(2);
             let size = (data.size / 1024).toFixed(2);
@@ -29,7 +27,7 @@ module.exports = function download(progressDuration, progressMessage, initialPro
                 progress: Math.floor(initialProgress + progressDuration * data.progress / 100),
             });
         });
-        downloader.on('end', () => resolve(javaDestDir));
+        downloader.on('end', path => resolve(path));
         downloader.on('error', () => reject);
     });
 };

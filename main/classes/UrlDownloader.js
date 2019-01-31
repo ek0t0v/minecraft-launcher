@@ -8,13 +8,14 @@ const getContentLength = require('../modules/util/getContentLength');
 
 module.exports = class UrlDownloader extends EventEmitter {
     download(url, dest) {
-        if (!fs.existsSync(dest)){
+        if (!fs.existsSync(dest)) {
             fs.mkdirSync(dest);
         }
 
         getContentLength(url)
             .then(size => {
-                const stream = fs.createWriteStream(dest.concat(path.sep).concat(url.substr(url.lastIndexOf('/') + 1)));
+                const filePath = dest.concat(path.sep).concat(url.substr(url.lastIndexOf('/') + 1));
+                const stream = fs.createWriteStream(filePath);
 
                 let downloadedBytes = 0;
                 let bytesInPercent = Math.floor(size / 100);
@@ -38,9 +39,7 @@ module.exports = class UrlDownloader extends EventEmitter {
                         }
                     })
                     .on('error', e => { throw e })
-                    .on('end', () => {
-                        this.emit('end');
-                    })
+                    .on('end', () => this.emit('end', filePath))
                     .pipe(stream);
             })
             .catch(e => { throw e });
