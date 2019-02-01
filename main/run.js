@@ -32,23 +32,24 @@ function initWindow() {
     return window;
 }
 
-module.exports = {
-    run: function run() {
-        initConfig();
+module.exports.run = function run() {
+    initConfig();
 
-        require('./listeners');
+    require('./listeners');
 
-        initWindow();
+    initWindow();
 
-        if (process.env.NODE_ENV === 'development') {
-            require('vue-devtools').install();
-        }
-    },
-    setAppDir: function setAppDir(dir) {
-        const userDataPathArray = app.getPath('userData').split(path.sep);
-
-        userDataPathArray.splice(-1, 1);
-
-        app.setPath('userData', userDataPathArray.join(path.sep).concat(path.sep).concat('.launcher'));
-    },
+    if (process.env.NODE_ENV === 'development') {
+        require('vue-devtools').install();
+    }
 };
+
+module.exports.setAppDir = function setAppDir(dir) {
+    const userDataPathArray = app.getPath('userData').split(path.sep);
+
+    userDataPathArray.splice(-1, 1);
+
+    app.setPath('userData', userDataPathArray.join(path.sep).concat(path.sep).concat('.launcher'));
+};
+
+

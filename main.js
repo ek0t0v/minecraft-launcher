@@ -1,7 +1,8 @@
 const { app } = require('electron');
+const constants = require('./main/constants');
 const run = require('./main/run');
 
-run.setAppDir('.launcher');
+run.setAppDir(constants.userDataDir);
 
 app.on('ready', () => {
     run.run();

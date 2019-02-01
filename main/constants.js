@@ -4,6 +4,7 @@ const { app } = require('electron');
 const path = require('path');
 
 module.exports = Object.freeze({
+    userDataDir: '.launcher',
     path: {
         java: app.getPath('userData').concat(path.sep).concat('java'),
         assets: app.getPath('userData').concat(path.sep).concat('assets'),
