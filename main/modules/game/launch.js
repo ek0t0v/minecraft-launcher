@@ -1,11 +1,13 @@
 'use strict';
 
+const rimraf = require('rimraf');
 const constants = require('../../constants');
 const sendMessageToRenderer = require('../util/sendMessageToRenderer');
 const trans = require('../util/trans');
 const isJavaInstalled = require('../java/isInstalled');
 const downloadJava = require('../java/download');
 const unpackTar = require('../util/unpackTar');
+const checkVersion = require('../version/checkVersion');
 
 /**
  * @param versionId
@@ -44,8 +46,6 @@ module.exports = async function launch(versionId, userId, options) {
             progress,
         );
 
-        console.log(javaTarPath);
-
         progress += constants.launchCheckpoints.DOWNLOAD_JAVA.duration;
 
         sendMessageToRenderer('launch:progress', {
@@ -53,6 +53,7 @@ module.exports = async function launch(versionId, userId, options) {
             progress,
         });
         await unpackTar(javaTarPath, constants.path.java);
+        rimraf.sync(constants.path.tmp);
 
         progress += constants.launchCheckpoints.UNPACK_JAVA.duration;
     } else {
@@ -60,15 +61,19 @@ module.exports = async function launch(versionId, userId, options) {
         progress += constants.launchCheckpoints.UNPACK_JAVA.duration;
     }
 
-    // чекаем версию
+    sendMessageToRenderer('launch:progress', {
+        step: trans(constants.launchCheckpoints.CHECK_VERSION.message),
+        progress,
+    });
+    const versionInstallNeeded = !await checkVersion(versionId);
 
-    // загружаем версию
+    progress += constants.launchCheckpoints.CHECK_VERSION.duration;
 
-    // распаковываем версию
+    if (versionInstallNeeded) {
+        // загружаем версию
 
-    // проверяем ассеты
-
-    // загружаем ассеты
+        // распаковываем версию
+    }
 
     // todo: Записывать lastVersion в конфиг, когда версия игры установлена.
 

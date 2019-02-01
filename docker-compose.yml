@@ -7,7 +7,7 @@ services:
     volumes:
       - ./:/app
       - $HOME/.Xauthority:/home/node/.Xauthority
-      - ./docker/config:/home/node/.config/Launcher
+      - ./docker/config:/home/node/.config/.launcher
     working_dir: /app
     environment:
       DISPLAY: $DISPLAY

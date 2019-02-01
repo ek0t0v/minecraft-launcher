@@ -1,10 +1,10 @@
 const { app } = require('electron');
 const run = require('./main/run');
 
-// todo: На windows похоже не грузятся шрифты, поправить.
+run.setAppDir('.launcher');
 
 app.on('ready', () => {
-    run();
+    run.run();
 });
 
 app.on('window-all-closed', () => {
