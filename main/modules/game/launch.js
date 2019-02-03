@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+const fs = require('fs');
 const rimraf = require('rimraf');
 const constants = require('../../constants');
 const sendMessageToRenderer = require('../util/sendMessageToRenderer');
@@ -7,7 +9,8 @@ const trans = require('../util/trans');
 const isJavaInstalled = require('../java/isInstalled');
 const downloadJava = require('../java/download');
 const unpackTar = require('../util/unpackTar');
-const checkVersion = require('../version/checkVersion');
+const isVersionInstalled = require('../version/isInstalled');
+const downloadVersion = require('../version/download');
 
 /**
  * @param versionId
@@ -65,21 +68,57 @@ module.exports = async function launch(versionId, userId, options) {
         step: trans(constants.launchCheckpoints.CHECK_VERSION.message),
         progress,
     });
-    const versionInstallNeeded = !await checkVersion(versionId);
+    const versionInstallNeeded = !await isVersionInstalled(versionId);
 
     progress += constants.launchCheckpoints.CHECK_VERSION.duration;
 
     if (versionInstallNeeded) {
-        // загружаем версию
+        sendMessageToRenderer('launch:progress', {
+            step: trans(constants.launchCheckpoints.DOWNLOAD_VERSION.message),
+            progress,
+        });
+        const versionPath = await downloadVersion(
+            '1.13.2',
+            constants.launchCheckpoints.DOWNLOAD_VERSION.duration,
+            constants.launchCheckpoints.DOWNLOAD_VERSION.message,
+            progress,
+        );
 
-        // распаковываем версию
+        progress += constants.launchCheckpoints.DOWNLOAD_VERSION.duration;
+
+        sendMessageToRenderer('launch:progress', {
+            step: trans(constants.launchCheckpoints.UNPACK_VERSION.message),
+            progress,
+        });
+
+        const versionDir = `${constants.path.versions}${path.sep}1.13.2`;
+
+        if (!fs.existsSync(constants.path.minecraft)) {
+            fs.mkdirSync(constants.path.minecraft);
+        }
+
+        if (!fs.existsSync(constants.path.versions)) {
+            fs.mkdirSync(constants.path.versions);
+        }
+
+        rimraf.sync(versionDir);
+        fs.mkdirSync(versionDir);
+
+        await unpackTar(versionPath, versionDir);
+        rimraf.sync(constants.path.tmp);
+
+        progress += constants.launchCheckpoints.UNPACK_VERSION.duration;
+    } else {
+        progress += constants.launchCheckpoints.DOWNLOAD_VERSION.duration;
+        progress += constants.launchCheckpoints.UNPACK_VERSION.duration;
     }
 
-    // todo: Записывать lastVersion в конфиг, когда версия игры установлена.
+    sendMessageToRenderer('launch:progress', {
+        step: trans(constants.launchCheckpoints.RUN.message),
+        progress,
+    });
 
-    // проверяем что с клиентом все ок (контрольная сумма и т.п.)
-
-    // запускаем игру
+    // todo: Записывать lastVersion в конфиг, когда версия игры установлена + в installedVersions.
 
     sendMessageToRenderer('launch:done');
 

@@ -1,11 +1,10 @@
 const { app } = require('electron');
-const constants = require('./main/constants');
-const run = require('./main/run');
+const { run, setAppDir } = require('./main/run');
 
-run.setAppDir(constants.userDataDir);
+setAppDir('.launcher');
 
 app.on('ready', () => {
-    run.run();
+    run();
 });
 
 app.on('window-all-closed', () => {

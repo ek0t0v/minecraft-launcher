@@ -4,13 +4,13 @@ const { app } = require('electron');
 const path = require('path');
 
 module.exports = Object.freeze({
-    userDataDir: '.launcher',
     path: {
-        java: app.getPath('userData').concat(path.sep).concat('java'),
-        assets: app.getPath('userData').concat(path.sep).concat('assets'),
-        versions: app.getPath('userData').concat(path.sep).concat('versions'),
-        tmp: app.getPath('userData').concat(path.sep).concat('tmp'),
+        java: `${app.getPath('userData')}${path.sep}java`,
+        minecraft: `${app.getPath('userData')}${path.sep}minecraft`,
+        versions: `${app.getPath('userData')}${path.sep}minecraft${path.sep}versions`,
+        tmp: `${app.getPath('userData')}${path.sep}tmp`,
     },
+    assetsUrl: 'http://resources.download.minecraft.net',
     launchCheckpoints: {
         CHECK_JAVA: {
             message: 'launchCheckpoint.checkJava',
@@ -18,7 +18,7 @@ module.exports = Object.freeze({
         },
         DOWNLOAD_JAVA: {
             message: 'launchCheckpoint.downloadJava',
-            duration: 20,
+            duration: 25,
         },
         UNPACK_JAVA: {
             message: 'launchCheckpoint.unpackJava',
@@ -28,25 +28,13 @@ module.exports = Object.freeze({
             message: 'launchCheckpoint.checkVersion',
             duration: 2,
         },
-        DOWNLOAD_CLIENT: {
-            message: 'launchCheckpoint.downloadClient',
-            duration: 20,
+        DOWNLOAD_VERSION: {
+            message: 'launchCheckpoint.downloadVersion',
+            duration: 59,
         },
-        UNPACK_CLIENT: {
-            message: 'launchCheckpoint.unpackClient',
+        UNPACK_VERSION: {
+            message: 'launchCheckpoint.unpackVersion',
             duration: 5,
-        },
-        CHECK_ASSETS: {
-            message: 'launchCheckpoint.checkAssets',
-            duration: 5,
-        },
-        DOWNLOAD_ASSETS: {
-            message: 'launchCheckpoint.downloadAssets',
-            duration: 35,
-        },
-        CHECK_CLIENT_CHECKSUM: {
-            message: 'launchCheckpoint.checkClientChecksum',
-            duration: 4,
         },
         RUN: {
             message: 'launchCheckpoint.run',

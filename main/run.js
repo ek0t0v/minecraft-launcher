@@ -49,7 +49,7 @@ module.exports.setAppDir = function setAppDir(dir) {
 
     userDataPathArray.splice(-1, 1);
 
-    app.setPath('userData', userDataPathArray.join(path.sep).concat(path.sep).concat('.launcher'));
+    app.setPath('userData', userDataPathArray.join(path.sep).concat(path.sep).concat(dir));
 };
 
 

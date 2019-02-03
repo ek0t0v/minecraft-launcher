@@ -90,11 +90,8 @@
         "downloadJava": "Java download...",
         "unpackJava": "Unpacking...",
         "checkVersion": "Version check...",
-        "downloadClient": "Client download...",
-        "unpackClient": "Unpacking...",
-        "checkAssets": "Check assets...",
-        "downloadAssets": "Assets download...",
-        "checkClientChecksum": "Client check...",
+        "downloadVersion": "Download version...",
+        "unpackVersion": "Unpacking...",
         "run": "Running game..."
     }
 }

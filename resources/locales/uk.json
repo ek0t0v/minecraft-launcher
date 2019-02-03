@@ -90,11 +90,8 @@
         "downloadJava": "Завантаження Java...",
         "unpackJava": "Розпакування...",
         "checkVersion": "Перевірка наявності версії...",
-        "downloadClient": "Завантаження клієнта...",
-        "unpackClient": "Розпакування...",
-        "checkAssets": "Перевірка ресурсів...",
-        "downloadAssets": "Завантаження ресурсів",
-        "checkClientChecksum": "Перевірка клієнта...",
+        "downloadVersion": "Завантаження файлів гри...",
+        "unpackVersion": "Розпакування...",
         "run": "Запуск гри..."
     }
 }

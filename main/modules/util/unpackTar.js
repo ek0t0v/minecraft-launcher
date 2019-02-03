@@ -15,6 +15,6 @@ module.exports = function unpackTar(src, dest) {
             strict: true,
         })
             .then(() => resolve())
-            .catch(e => { throw e });
+            .catch(() => reject());
     });
 };
