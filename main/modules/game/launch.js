@@ -2,16 +2,18 @@
 
 const path = require('path');
 const fs = require('fs');
+const { spawn } = require('child_process');
 const rimraf = require('rimraf');
 const constants = require('../../constants');
-const sendMessageToRenderer = require('../util/sendMessageToRenderer');
-const trans = require('../util/trans');
+const pushVersionToInstalledVersions = require('../config/pushVersionToInstalledVersions');
 const isJavaInstalled = require('../java/isInstalled');
 const downloadJava = require('../java/download');
-const unpackTar = require('../util/unpackTar');
+const loadVersions = require('../version/loadVersions');
 const isVersionInstalled = require('../version/isInstalled');
 const downloadVersion = require('../version/download');
-const loadVersions = require('../version/loadVersions');
+const sendMessageToRenderer = require('../util/sendMessageToRenderer');
+const unpackTar = require('../util/unpackTar');
+const trans = require('../util/trans');
 
 /**
  * @param versionId
@@ -59,6 +61,8 @@ module.exports = async function launch(versionId, userId, options) {
         await unpackTar(javaTarPath, constants.path.java);
         rimraf.sync(constants.path.tmp);
 
+        updateConfig('installedVersions')
+
         progress += constants.launchCheckpoints.UNPACK_JAVA.duration;
     } else {
         progress += constants.launchCheckpoints.DOWNLOAD_JAVA.duration;
@@ -73,7 +77,7 @@ module.exports = async function launch(versionId, userId, options) {
     const versionData = versionsData.filter(version => {
         return version.id === versionId;
     })[0];
-    const versionInstallNeeded = !await isVersionInstalled(versionData);
+    const versionInstallNeeded = !await isVersionInstalled(versionData.id);
 
     progress += constants.launchCheckpoints.CHECK_VERSION.duration;
 
@@ -112,6 +116,8 @@ module.exports = async function launch(versionId, userId, options) {
         await unpackTar(versionPath, versionDir);
         rimraf.sync(constants.path.tmp);
 
+        pushVersionToInstalledVersions(versionData);
+
         progress += constants.launchCheckpoints.UNPACK_VERSION.duration;
     } else {
         progress += constants.launchCheckpoints.DOWNLOAD_VERSION.duration;
@@ -123,7 +129,20 @@ module.exports = async function launch(versionId, userId, options) {
         progress,
     });
 
-    // todo: Записывать lastVersion в конфиг, когда версия игры установлена + в installedVersions.
+    global.window.minimize();
+
+    const ls = spawn('java', [
+        '-jar',
+    ]);
+
+    // todo: После запуска игры, записать версию в конфиг, поле lastVersion.
+
+    ls.on('exit', code => {
+        setTimeout(() => {
+            global.window.show()
+        }, 2000);
+        console.log(`Exit code is: ${code}`);
+    });
 
     sendMessageToRenderer('launch:done');
 

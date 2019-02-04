@@ -1,9 +1,11 @@
 'use strict';
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const storage = require('electron-json-storage-sync');
 const defaultConfig = require('../resources/config');
 const path = require('path');
+
+let window = null;
 
 function initConfig() {
     if (!storage.get('config').status) {
@@ -18,7 +20,7 @@ function initConfig() {
 }
 
 function initWindow() {
-    let window = new BrowserWindow({
+    window = new BrowserWindow({
         width: defaultConfig.width,
         height: defaultConfig.height,
         frame: false,
@@ -30,7 +32,8 @@ function initWindow() {
     window.on('closed', () => window = null);
     window.loadFile('index.html');
 
-    return window;
+    // todo: Стоит придумать что-то другое (хотя сейчас у приложения всего одно окно, других не предвидится, поэтому норм).
+    global.window = window;
 }
 
 module.exports.run = function run() {

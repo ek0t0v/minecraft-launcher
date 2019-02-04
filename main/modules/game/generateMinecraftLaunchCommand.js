@@ -3,6 +3,25 @@
 const { app } = require('electron');
 
 module.exports = function generateMinecraftLaunchCommand(versionId, userId) {
+    // достать slug по id версии и вообще достать инфу о версии (должна быть в конфиге в installedVersions)
+    // прочитать json версии из папки версии, достать arguments
+    // аргументы jvm пока захардкодим
+    // либы берем из папки libraries (список названий файлов)
+
+    // взять mainClass из /versions/{slug}/{slug}.json, поле mainClass
+
+    // --username - ник
+    // --gameDir - /versions/{slug}
+    // --version - версия игры
+    // --accessToken - ?
+    // --uuid - ?
+    // --userType - ?
+    // --versionType - ?
+    // --width - ширина окна
+    // --height - высота окна
+    // --assetsDir - /versions/{slug}/assets
+    // --assetIndex - взять из /versions/{slug}/{slug}.json, поле assetIndex.id
+
     const version = '1.13.2'; // нужно достать по versionId
     const user = 'Cote';
 
@@ -66,10 +85,10 @@ module.exports = function generateMinecraftLaunchCommand(versionId, userId) {
         `-Xmx1024M`,
         `-Dfile.encoding=UTF-8`,
         `-Xss1M`,
-        `-Djava.library.path=${ nativesPath }`,
+        `-Djava.library.path=${ nativesPath }`, // /versions/{version slug}/natives
         `-Dminecraft.launcher.brand=java-minecraft-launcher`,
         `-Dminecraft.launcher.version=1.6.84-j`,
-        `-cp ${ libs }:${ gameJar }`,
+        `-cp ${ libs }:${ gameJar }`, // {libs}:/versions/{version slug}/{version slug}.jar
         mainClass,
         `--username ${ user }`,
         `--gameDir ${ gameDir }`,
