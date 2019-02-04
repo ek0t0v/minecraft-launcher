@@ -2,7 +2,7 @@
 
 ## [0.0.6] - 2019-02-04
 
-- разработка (упаковщика)[https://github.com/seniorcote/minecraft-version-packager] для версий
+- разработка [упаковщика](https://github.com/seniorcote/minecraft-version-packager) для версий
 - скачивание и распаковка версий
 - доработка API получения версий
 - уменьшение размера сборки
