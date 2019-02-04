@@ -11,6 +11,7 @@ module.exports = Object.freeze({
         tmp: `${app.getPath('userData')}${path.sep}tmp`,
     },
     assetsUrl: 'http://resources.download.minecraft.net',
+    versionsApiBaseUrl: 'https://my-json-server.typicode.com/seniorcote/test-api/versions',
     launchCheckpoints: {
         CHECK_JAVA: {
             message: 'launchCheckpoint.checkJava',

@@ -2,13 +2,13 @@
 
 const fetch = require('node-fetch');
 const isInstalled = require('./isInstalled');
-const VERSIONS_API_URL = 'https://my-json-server.typicode.com/seniorcote/test-api/versions';
+const constants = require('../../constants');
 
 /**
  * @returns {Promise<*>}
  */
 module.exports = async function loadVersions() {
-    const response = await fetch(VERSIONS_API_URL);
+    const response = await fetch(constants.versionsApiBaseUrl);
     const versions = await response.json();
 
     return versions.map(version => {

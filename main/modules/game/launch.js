@@ -11,6 +11,7 @@ const downloadJava = require('../java/download');
 const unpackTar = require('../util/unpackTar');
 const isVersionInstalled = require('../version/isInstalled');
 const downloadVersion = require('../version/download');
+const loadVersions = require('../version/loadVersions');
 
 /**
  * @param versionId
@@ -68,7 +69,11 @@ module.exports = async function launch(versionId, userId, options) {
         step: trans(constants.launchCheckpoints.CHECK_VERSION.message),
         progress,
     });
-    const versionInstallNeeded = !await isVersionInstalled(versionId);
+    const versionsData = await loadVersions();
+    const versionData = versionsData.filter(version => {
+        return version.id === versionId;
+    })[0];
+    const versionInstallNeeded = !await isVersionInstalled(versionData);
 
     progress += constants.launchCheckpoints.CHECK_VERSION.duration;
 
@@ -78,7 +83,7 @@ module.exports = async function launch(versionId, userId, options) {
             progress,
         });
         const versionPath = await downloadVersion(
-            '1.13.2',
+            versionData.slug,
             constants.launchCheckpoints.DOWNLOAD_VERSION.duration,
             constants.launchCheckpoints.DOWNLOAD_VERSION.message,
             progress,
@@ -91,7 +96,7 @@ module.exports = async function launch(versionId, userId, options) {
             progress,
         });
 
-        const versionDir = `${constants.path.versions}${path.sep}1.13.2`;
+        const versionDir = `${constants.path.versions}${path.sep}${versionData.slug}`;
 
         if (!fs.existsSync(constants.path.minecraft)) {
             fs.mkdirSync(constants.path.minecraft);

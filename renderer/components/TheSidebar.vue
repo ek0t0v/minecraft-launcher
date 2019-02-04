@@ -35,8 +35,8 @@
                 :max-height="200"
             >
                 <version-select-option
-                    v-for="(version, index) in versions"
-                    :key="index"
+                    v-for="version in versions"
+                    :key="version.id"
                     :is-installed="version.isInstalled"
                     @click.native="selectVersion(version)"
                 >
