@@ -26,30 +26,79 @@
 [
     {
         "id": 1,
-        "name": "1.13.2 (ванильная версия)",
+        "isActive": true,
+        "name": "1.13.2",
+        "slug": "1.13.2",
         "type": 0,
-        "clientUrl": "https://google.com",
-        "version": null
+        "clientUrl": "http://5-187-10790-3.b.cdn12.com/versions/1.13.2",
+        "version": null,
+        "arguments": {
+            "game": [],
+            "jvm": []
+        }
     },
     {
         "id": 2,
-        "name": "Сервер без собственного клиента",
-        "type": 1,
-        "clientUrl": null,
-        "version": {
-            "id": 1,
-            "name": "1.13.2 (ванильная версия)",
-            "type": 0,
-            "clientUrl": "https://google.com",
-            "version": null
+        "isActive": false,
+        "name": "Lotmine",
+        "slug": "lotmine",
+        "type": 2,
+        "clientUrl": "https://google.com",
+        "version": null,
+        "arguments": {
+            "game": [],
+            "jvm": []
         }
     },
     {
         "id": 3,
-        "name": "Сервер с собственным клиентом",
-        "type": 2,
-        "clientUrl": "https://google.com",
-        "version": null
+        "isActive": false,
+        "name": "ForsCraft МиниИгры 1.8-1.12.2",
+        "slug": "forscraft",
+        "type": 1,
+        "clientUrl": null,
+        "version": {
+            "id": 1,
+            "isActive": true,
+            "name": "1.13.2",
+            "slug": "1.13.2",
+            "type": 0,
+            "clientUrl": "https://google.com",
+            "version": null,
+            "arguments": {
+                "game": [],
+                "jvm": []
+            }
+        },
+        "arguments": {
+            "game": [],
+            "jvm": []
+        }
+    },
+    {
+        "id": 4,
+        "isActive": true,
+        "name": "MineLegacy 1.8-1.13.2 Survival",
+        "slug": "minelegacy",
+        "type": 1,
+        "clientUrl": null,
+        "version": {
+            "id": 1,
+            "isActive": true,
+            "name": "1.13.2",
+            "slug": "1.13.2",
+            "type": 0,
+            "clientUrl": "https://google.com",
+            "version": null,
+            "arguments": {
+                "game": [],
+                "jvm": []
+            }
+        },
+        "arguments": {
+            "game": [],
+            "jvm": []
+        }
     }
 ]
 ```
