@@ -23,6 +23,7 @@ function initWindow() {
         height: defaultConfig.height,
         frame: false,
         titleBarStyle: 'hidden',
+        icon: './resources/icons/launcher.png',
     });
 
     window.setResizable(false);

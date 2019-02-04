@@ -1,7 +1,7 @@
 'use strict';
 
 const fetch = require('node-fetch');
-const isVersionInstalled = require('./isVersionInstalled');
+const isInstalled = require('./isInstalled');
 const VERSIONS_API_URL = 'https://my-json-server.typicode.com/seniorcote/test-api/versions';
 
 /**
@@ -12,7 +12,7 @@ module.exports = async function loadVersions() {
     const versions = await response.json();
 
     return versions.map(version => {
-        version.isInstalled = isVersionInstalled(version);
+        version.isInstalled = isInstalled(version);
 
         return version;
     });
