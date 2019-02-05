@@ -38,10 +38,10 @@ module.exports = class UrlDownloader extends EventEmitter {
                             });
                         }
                     })
-                    .on('error', e => { throw e })
+                    .on('error', e => this.emit('error', e))
                     .on('end', () => this.emit('end', filePath))
                     .pipe(stream);
             })
-            .catch(e => { throw e });
+            .catch(e => this.emit('error', e));
     }
 };

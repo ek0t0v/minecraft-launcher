@@ -5,10 +5,10 @@ const path = require('path');
 
 module.exports = Object.freeze({
     path: {
-        java: `${app.getPath('userData')}${path.sep}java`,
-        minecraft: `${app.getPath('userData')}${path.sep}minecraft`,
-        versions: `${app.getPath('userData')}${path.sep}minecraft${path.sep}versions`,
-        tmp: `${app.getPath('userData')}${path.sep}tmp`,
+        java: `${ app.getPath('userData') }${ path.sep }java`,
+        minecraft: `${ app.getPath('userData') }${ path.sep }minecraft`,
+        versions: `${ app.getPath('userData') }${ path.sep }minecraft${ path.sep }versions`,
+        tmp: `${ app.getPath('userData') }${ path.sep }tmp`,
     },
     assetsUrl: 'http://resources.download.minecraft.net',
     versionsApiBaseUrl: 'https://my-json-server.typicode.com/seniorcote/test-api/versions',

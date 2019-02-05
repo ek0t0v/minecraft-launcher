@@ -8,5 +8,7 @@
     "locale": "en",
     "installedVersions": [],
     "lastVersion": null,
-    "lastUser": null
+    "lastUser": null,
+    "actionAfterLaunch": "minimize",
+    "memoryAllocation": 1024
 }

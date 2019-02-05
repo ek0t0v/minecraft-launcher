@@ -28,6 +28,6 @@ module.exports = function download(progressDuration, progressMessage, initialPro
             });
         });
         downloader.on('end', path => resolve(path));
-        downloader.on('error', () => reject);
+        downloader.on('error', e => reject(e));
     });
 };

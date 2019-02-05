@@ -16,3 +16,7 @@ ipc.on('launch:progress', (e, payload) => {
 ipc.on('launch:done', () => {
     store.dispatch('loading/stop');
 });
+
+ipc.on('launch:error', (e, payload) => {
+    alert(payload.error);
+});
