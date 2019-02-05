@@ -42,6 +42,8 @@
         methods: {
             onChange(e) {
                 this.localValue = e.target.value;
+
+                this.$emit('on-change', this.localValue);
             },
             onBlur() {
                 if (this.value === this.localValue) {

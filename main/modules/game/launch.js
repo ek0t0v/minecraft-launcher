@@ -6,6 +6,7 @@ const { exec } = require('child_process');
 const rimraf = require('rimraf');
 const constants = require('../../constants');
 const pushVersionToInstalledVersions = require('../config/pushVersionToInstalledVersions');
+const updateConfig = require('../config/updateConfig');
 const isJavaInstalled = require('../java/isInstalled');
 const downloadJava = require('../java/download');
 const loadVersions = require('../version/loadVersions');
@@ -108,7 +109,8 @@ module.exports = async function launch(versionId, userId, options) {
         await unpackTar(versionPath, versionDir);
         rimraf.sync(constants.path.tmp);
 
-        pushVersionToInstalledVersions(versionData);
+        // проверить, что установилось
+        pushVersionToInstalledVersions(versionData); // только если установилось
 
         progress += constants.launchCheckpoints.UNPACK_VERSION.duration;
     } else {
@@ -136,23 +138,30 @@ module.exports = async function launch(versionId, userId, options) {
         username: 'Cote',
         uuid: 'uuid',
         accessToken: 'token',
+        gameArgs: [
+            '--demo',
+        ],
     }));
+
+    let firstOutput = false;
 
     stdout.on('data', data => {
         log(data, constants.path.minecraft.concat(path.sep).concat('log.txt'));
+
+        if (!firstOutput) {
+            firstOutput = true;
+
+            updateConfig('lastVersion', versionData);
+
+            sendMessageToRenderer('launch:done');
+
+            global.isLaunching = false;
+            // global.window.close();
+            global.window.minimize();
+        }
     });
 
     stderr.on('data', data => {
         log(data, constants.path.minecraft.concat(path.sep).concat('log.txt'));
-
-        sendMessageToRenderer('launch:error', {
-            error: data,
-        });
     });
-
-    sendMessageToRenderer('launch:done');
-
-    global.isLaunching = false;
-    // global.window.close();
-    global.window.minimize();
 };

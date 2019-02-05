@@ -12,7 +12,7 @@ module.exports = async function loadVersions() {
     const versions = await response.json();
 
     return versions.map(version => {
-        version.isInstalled = isInstalled(version);
+        version.isInstalled = isInstalled(version.id);
 
         return version;
     });

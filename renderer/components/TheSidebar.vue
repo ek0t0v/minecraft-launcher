@@ -3,7 +3,7 @@
         <div class="sidebar-menu">
             <router-link
                 class="sidebar-menu__button"
-                to="accounts"
+                to="users"
             >
                 <i class="sidebar-menu__icon fas fa-users" />
             </router-link>
@@ -21,10 +21,22 @@
             </router-link>
         </div>
         <div class="sidebar-play">
-            <app-input
+            <app-select
                 class="sidebar-play__element"
+                :current="config.lastUser"
+                :appears-from="'bottom'"
                 :placeholder="$t('play.nickname.placeholder')"
-            />
+                :is-disabled="isUsersEmpty"
+                :max-height="200"
+            >
+                <app-select-option
+                    v-for="(user, index) in users"
+                    :key="index"
+                    @click.native="selectUser(user)"
+                >
+                    {{ user.username }}
+                </app-select-option>
+            </app-select>
             <app-select
                 class="sidebar-play__element"
                 :current="config.lastVersion"
@@ -62,10 +74,12 @@
     import { launch } from '../commands/game';
     import { mapGetters, mapActions } from 'vuex';
     import VersionSelectOption from './VersionSelectOption';
+    import AppSelectOption from './App/AppSelectOption';
 
     export default {
         name: 'TheSidebar',
         components: {
+            AppSelectOption,
             VersionSelectOption,
             AppButton,
             AppInput,
@@ -79,6 +93,10 @@
                 isVersionsLoading: 'isVersionsLoading',
                 isVersionsEmpty: 'isVersionsEmpty',
                 versions: 'items',
+            }),
+            ...mapGetters('user', {
+                isUsersEmpty: 'isUsersEmpty',
+                users: 'items',
             }),
             playButtonText() {
                 if (!this.config.lastVersion || this.config.lastVersion.isInstalled) {
@@ -95,6 +113,7 @@
         methods: {
             ...mapActions('config', {
                 setLastVersion: 'setLastVersion',
+                setLastUser: 'setLastUser',
             }),
             ...mapActions('version', {
                 showVersionsLoading: 'startLoading',
@@ -105,6 +124,11 @@
             selectVersion(version) {
                 this.setLastVersion({
                     version,
+                });
+            },
+            selectUser(user) {
+                this.setLastUser({
+                    user,
                 });
             },
         },

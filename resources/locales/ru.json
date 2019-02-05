@@ -75,7 +75,7 @@
             }
         }
     },
-    "accounts": {
+    "users": {
         "header": {
             "title": "Аккаунты"
         }

@@ -15,6 +15,7 @@
                 'app__view--is-loading-at-the-bottom': config.loadingPosition === 'bottom',
             }"
         >
+            <the-modal />
             <keep-alive>
                 <router-view
                     class="app-view"
@@ -34,12 +35,14 @@
     import TheSidebar from './TheSidebar';
     import TheLocaleChanger from './TheLocaleChanger';
     import TheWindowHeader from './TheWindowHeader';
+    import TheModal from './TheModal';
     import { mapGetters } from 'vuex';
     import { loadConfig } from '../commands/config';
 
     export default {
         name: 'App',
         components: {
+            TheModal,
             TheSidebar,
             TheLoading,
             TheLocaleChanger,

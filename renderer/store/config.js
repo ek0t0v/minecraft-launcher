@@ -27,13 +27,21 @@ export default {
                 items: payload.config.installedVersions,
             }, { root: true });
 
+            dispatch('user/setItems', {
+                items: payload.config.users,
+            }, { root: true });
+
             if (payload.config.lastVersion) {
                 dispatch('config/setLastVersion', {
                     version: payload.config.lastVersion,
                 }, { root: true });
             }
 
-            // todo: Положить список юзеров в user store.
+            if (payload.config.lastUser) {
+                dispatch('config/setLastUser', {
+                    user: payload.config.lastUser,
+                }, { root: true });
+            }
         },
         updateConfig({ commit }, payload) {
             if (payload.save || typeof payload.save === 'undefined') {
@@ -51,6 +59,12 @@ export default {
 
             // todo: Не забыть помечать версию как lastVersion когда она будет установлена (с сохранением в storage).
         },
+        setLastUser({ dispatch }, payload) {
+            dispatch('config/updateConfig', {
+                key: 'lastUser',
+                value: payload.user,
+            }, { root: true });
+        },
     },
     mutations: {
         init(state, payload) {
@@ -58,9 +72,6 @@ export default {
         },
         updateConfig(state, payload) {
             Object.assign(state, { [payload.key]: payload.value });
-        },
-        setLastVersion(state, payload) {
-            state.lastVersion = payload.version;
         },
         reset(state) {
             const s = initialState();
