@@ -23,14 +23,14 @@
         <div class="sidebar-play">
             <app-select
                 class="sidebar-play__element"
-                :current="config.lastUser"
+                :current="lastUserUsername"
                 :appears-from="'bottom'"
-                :placeholder="$t('play.nickname.placeholder')"
+                :placeholder="$t('play.username.placeholder')"
                 :is-disabled="isUsersEmpty"
                 :max-height="200"
             >
                 <app-select-option
-                    v-for="(user, index) in users"
+                    v-for="(user, index) in config.users"
                     :key="index"
                     @click.native="selectUser(user)"
                 >
@@ -39,7 +39,7 @@
             </app-select>
             <app-select
                 class="sidebar-play__element"
-                :current="config.lastVersion"
+                :current="lastVersionName"
                 :appears-from="'bottom'"
                 :placeholder="$t('play.version.placeholder')"
                 :is-loading="isVersionsLoading"
@@ -47,7 +47,7 @@
                 :max-height="200"
             >
                 <version-select-option
-                    v-for="version in versions"
+                    v-for="version in config.versions"
                     :key="version.id"
                     :is-installed="version.isInstalled"
                     @click.native="selectVersion(version)"
@@ -88,16 +88,16 @@
         computed: {
             ...mapGetters('config', {
                 config: 'config',
-            }),
-            ...mapGetters('version', {
-                isVersionsLoading: 'isVersionsLoading',
                 isVersionsEmpty: 'isVersionsEmpty',
-                versions: 'items',
-            }),
-            ...mapGetters('user', {
                 isUsersEmpty: 'isUsersEmpty',
-                users: 'items',
+                isVersionsLoading: 'isVersionsLoading',
             }),
+            lastVersionName() {
+                return this.config.lastVersion ? this.config.lastVersion.name : null
+            },
+            lastUserUsername() {
+                return this.config.lastUser ? this.config.lastUser.username : null
+            },
             playButtonText() {
                 if (!this.config.lastVersion || this.config.lastVersion.isInstalled) {
                     return this.$t('play.button.play');
@@ -107,29 +107,23 @@
             },
         },
         created() {
-            this.showVersionsLoading();
+            this.startVersionsLoading();
             loadVersions();
         },
         methods: {
             ...mapActions('config', {
                 setLastVersion: 'setLastVersion',
                 setLastUser: 'setLastUser',
-            }),
-            ...mapActions('version', {
-                showVersionsLoading: 'startLoading',
+                startVersionsLoading: 'startVersionsLoading',
             }),
             play() {
                 launch(this.config.lastVersion.id);
             },
             selectVersion(version) {
-                this.setLastVersion({
-                    version,
-                });
+                this.setLastVersion(version);
             },
             selectUser(user) {
-                this.setLastUser({
-                    user,
-                });
+                this.setLastUser(user);
             },
         },
     }

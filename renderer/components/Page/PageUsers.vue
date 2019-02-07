@@ -4,7 +4,7 @@
         <app-page-content class="users">
             <button @click="openCreateUserModal">Create user</button>
             <div
-                v-for="(user, index) in users"
+                v-for="(user, index) in config.users"
                 :key="index"
             >
                 {{ user.username }}
@@ -26,8 +26,8 @@
             AppPageContent,
         },
         computed: {
-            ...mapGetters('user', {
-                users: 'items',
+            ...mapGetters('config', {
+                config: 'config',
             }),
         },
         methods: {

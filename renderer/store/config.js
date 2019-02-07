@@ -7,7 +7,10 @@ function initialState() {
         sidebarPosition: 'right',
         loadingPosition: 'top',
         gameDirectory: null,
+        versions: [],
         lastVersion: null,
+        isVersionsLoading: false,
+        users: [],
         lastUser: null,
     };
 }
@@ -17,61 +20,66 @@ export default {
     state: initialState,
     getters: {
         config: state => state,
+        isVersionsEmpty: state => state.versions.length === 0,
+        isVersionsLoading: state => state.isVersionsLoading,
+        isUsersEmpty: state => state.users.length === 0,
         locale: state => state.locale,
     },
     actions: {
-        init({ commit, dispatch }, payload) {
-            commit('init', payload);
-
-            dispatch('version/setItems', {
-                items: payload.config.installedVersions,
-            }, { root: true });
-
-            dispatch('user/setItems', {
-                items: payload.config.users,
-            }, { root: true });
-
-            if (payload.config.lastVersion) {
-                dispatch('config/setLastVersion', {
-                    version: payload.config.lastVersion,
-                }, { root: true });
-            }
-
-            if (payload.config.lastUser) {
-                dispatch('config/setLastUser', {
-                    user: payload.config.lastUser,
-                }, { root: true });
-            }
+        init({ commit, dispatch }, config) {
+            commit('init', config);
         },
-        updateConfig({ commit }, payload) {
-            if (payload.save || typeof payload.save === 'undefined') {
-                updateConfig(payload.key, payload.value);
+        startVersionsLoading({ commit }) {
+            commit('startVersionsLoading');
+        },
+        stopVersionsLoading({ commit }) {
+            commit('stopVersionsLoading');
+        },
+        updateConfig({ commit }, { key, value, save }) {
+            if (save || typeof save === 'undefined') {
+                updateConfig(key, value);
             }
 
-            commit('updateConfig', payload);
+            commit('updateConfig', { key, value });
         },
-        setLastVersion({ dispatch }, payload) {
+        setLastVersion({ dispatch }, version) {
+            console.log(version);
             dispatch('config/updateConfig', {
                 key: 'lastVersion',
-                value: payload.version,
-                save: payload.version.isInstalled,
+                value: version,
+                save: version.isInstalled,
             }, { root: true });
-
-            // todo: Не забыть помечать версию как lastVersion когда она будет установлена (с сохранением в storage).
         },
-        setLastUser({ dispatch }, payload) {
+        setLastUser({ dispatch }, user) {
             dispatch('config/updateConfig', {
                 key: 'lastUser',
-                value: payload.user,
+                value: user,
             }, { root: true });
+        },
+        createUser({ dispatch, state }, user) {
+            state.users.unshift(user);
+
+            dispatch('config/updateConfig', {
+                key: 'users',
+                value: state.users,
+            }, { root: true });
+        },
+        removeUser({ commit }, user) {
+            commit('removeUser', user);
         },
     },
     mutations: {
         init(state, payload) {
             Object.assign(state, payload.config);
         },
-        updateConfig(state, payload) {
-            Object.assign(state, { [payload.key]: payload.value });
+        updateConfig(state, { key, value}) {
+            Object.assign(state, { [key]: value });
+        },
+        startVersionsLoading(state) {
+            state.isVersionsLoading = true;
+        },
+        stopVersionsLoading(state) {
+            state.isVersionsLoading = false;
         },
         reset(state) {
             const s = initialState();

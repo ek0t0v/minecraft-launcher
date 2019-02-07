@@ -4,7 +4,7 @@
         <app-page-content class="settings">
             <app-select
                 class="settings__element"
-                :current="currentLocale"
+                :current="currentLocale.name"
                 :label="$t('settings.element.locale.label')"
             >
                 <app-select-option
@@ -17,7 +17,7 @@
             </app-select>
             <app-select
                 class="settings__element"
-                :current="currentSidebarPosition"
+                :current="currentSidebarPosition.name"
                 :label="$t('settings.element.sidebarPosition.label')"
             >
                 <app-select-option
@@ -30,7 +30,7 @@
             </app-select>
             <app-select
                 class="settings__element"
-                :current="currentLoadingPosition"
+                :current="currentLoadingPosition.name"
                 :label="$t('settings.element.loadingPosition.label')"
             >
                 <app-select-option

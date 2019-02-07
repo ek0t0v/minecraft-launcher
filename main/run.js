@@ -23,7 +23,7 @@ function initWindow() {
     window = new BrowserWindow({
         width: defaultConfig.width,
         height: defaultConfig.height,
-        frame: false,
+        // frame: false,
         titleBarStyle: 'hidden',
         icon: './resources/icons/launcher.png',
     });
@@ -42,7 +42,7 @@ module.exports.run = function run() {
     require('./listeners');
 
     initWindow();
-
+    require('vue-devtools').install();
     if (process.env.NODE_ENV === 'development') {
         require('vue-devtools').install();
     }

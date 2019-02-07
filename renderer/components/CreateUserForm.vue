@@ -4,6 +4,7 @@
         @submit.prevent="onSubmit"
     >
         <app-input
+            class="create-user-form__element"
             :value="username"
             @on-change="updateUsername"
         />
@@ -15,7 +16,6 @@
     import AppInput from './App/AppInput';
     import AppButton from './App/AppButton';
     import { mapActions } from 'vuex';
-    import { createUser } from '../commands/user';
 
     export default {
         name: 'CreateUserForm',
@@ -29,18 +29,18 @@
             };
         },
         methods: {
-            ...mapActions('user', {
+            ...mapActions('config', {
                 createUser: 'createUser',
             }),
             updateUsername(username) {
                 this.username = username;
             },
             onSubmit() {
-                createUser({
+                this.createUser({
                     username: this.username,
                 });
 
-                this.$modal.close(); // todo: Закрывать, только когда юзер сохранился.
+                this.$modal.close();
             },
         },
     }
@@ -50,6 +50,12 @@
     @import (reference) '../styles/style';
 
     .create-user-form {
+
         width: 360px;
+
+        &__element {
+            margin: 0 0 24px 0;
+        }
+
     }
 </style>

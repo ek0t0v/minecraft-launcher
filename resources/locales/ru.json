@@ -1,6 +1,6 @@
 {
     "play": {
-        "nickname": {
+        "username": {
             "label": "Ник",
             "placeholder": "Ник"
         },

@@ -15,7 +15,7 @@
                 :class="'app-select__input--' + menuUniqueClass"
                 type="text"
                 readonly
-                :value="current ? current.name : null"
+                :value="current"
                 :placeholder="placeholder"
                 @click="openMenu"
             />
@@ -55,7 +55,7 @@
         },
         props: {
             current: {
-                type: Object,
+                type: String,
                 default: null,
             },
             placeholder: {
