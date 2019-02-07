@@ -64,8 +64,20 @@ export default {
                 value: state.users,
             }, { root: true });
         },
-        removeUser({ commit }, user) {
-            commit('removeUser', user);
+        removeUser({ dispatch, state }, user) {
+            const newUsersArray = state.users.filter(item => item !== user);
+
+            if (state.lastUser === user) {
+                dispatch('config/updateConfig', {
+                    key: 'lastUser',
+                    value: null,
+                }, { root: true });
+            }
+
+            dispatch('config/updateConfig', {
+                key: 'users',
+                value: newUsersArray,
+            }, { root: true });
         },
     },
     mutations: {

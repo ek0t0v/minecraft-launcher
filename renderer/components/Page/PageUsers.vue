@@ -4,10 +4,19 @@
         <app-page-content class="users">
             <button @click="openCreateUserModal">Create user</button>
             <div
+                class="users-list"
                 v-for="(user, index) in config.users"
                 :key="index"
             >
-                {{ user.username }}
+                <div class="users-list__item">
+                    <span class="users-list__username">{{ user.username }}</span>
+                    <span
+                        class="users-list__remove-button"
+                        @click="removeUser(user)"
+                    >
+                        <i class="fas fa-times" />
+                    </span>
+                </div>
             </div>
         </app-page-content>
     </div>
@@ -17,7 +26,7 @@
     import AppPageHeader from '../App/AppPageHeader';
     import AppPageContent from '../App/AppPageContent';
     import CreateUserForm from '../CreateUserForm';
-    import { mapGetters } from 'vuex';
+    import { mapGetters, mapActions } from 'vuex';
 
     export default {
         name: 'PageAccounts',
@@ -31,6 +40,9 @@
             }),
         },
         methods: {
+            ...mapActions('config', {
+                removeUser: 'removeUser',
+            }),
             openCreateUserModal() {
                 this.$modal.open(CreateUserForm, {
                     action: () => console.log('action'),

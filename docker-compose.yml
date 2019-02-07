@@ -11,4 +11,5 @@ services:
     working_dir: /app
     environment:
       DISPLAY: $DISPLAY
+      NODE_ENV: development
     network_mode: host
