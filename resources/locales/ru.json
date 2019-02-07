@@ -2,7 +2,11 @@
     "play": {
         "username": {
             "label": "Ник",
-            "placeholder": "Ник"
+            "placeholder": "Ник",
+            "action": {
+                "createUser": "Создать игрока",
+                "manageUsers": "Управление аккаунтами"
+            }
         },
         "version": {
             "label": "Версия",
@@ -93,5 +97,18 @@
         "downloadVersion": "Загрузка файлов игры...",
         "unpackVersion": "Распаковка...",
         "run": "Запуск игры..."
+    },
+    "modal": {
+        "createUser": {
+            "header": "Создать игрока"
+        }
+    },
+    "createUserForm": {
+        "field": {
+            "username": {
+                "placeholder": "Ник"
+            }
+        },
+        "submit": "Создать игрока"
     }
 }

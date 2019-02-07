@@ -2,7 +2,11 @@
     "play": {
         "username": {
             "label": "Nickname",
-            "placeholder": "Nickname"
+            "placeholder": "Nickname",
+            "action": {
+                "createUser": "Create player",
+                "manageUsers": "Account management"
+            }
         },
         "version": {
             "label": "Version",
@@ -93,5 +97,18 @@
         "downloadVersion": "Download version...",
         "unpackVersion": "Unpacking...",
         "run": "Running game..."
+    },
+    "modal": {
+        "createUser": {
+            "header": "Create player"
+        }
+    },
+    "createUserForm": {
+        "field": {
+            "username": {
+                "placeholder": "Nickname"
+            }
+        },
+        "submit": "Create player"
     }
 }

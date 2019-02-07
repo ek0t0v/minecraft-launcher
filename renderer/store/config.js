@@ -67,7 +67,7 @@ export default {
         removeUser({ dispatch, state }, user) {
             const newUsersArray = state.users.filter(item => item !== user);
 
-            if (state.lastUser === user) {
+            if (JSON.stringify(state.lastUser) === JSON.stringify(user)) {
                 dispatch('config/updateConfig', {
                     key: 'lastUser',
                     value: null,

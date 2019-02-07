@@ -2,7 +2,11 @@
     "play": {
         "username": {
             "label": "Нік",
-            "placeholder": "Нік"
+            "placeholder": "Нік",
+            "action": {
+                "createUser": "Створити гравця",
+                "manageUsers": "Керування обліковими записами"
+            }
         },
         "version": {
             "label": "Версія",
@@ -93,5 +97,18 @@
         "downloadVersion": "Завантаження файлів гри...",
         "unpackVersion": "Розпакування...",
         "run": "Запуск гри..."
+    },
+    "modal": {
+        "createUser": {
+            "header": "Створити гравця"
+        }
+    },
+    "createUserForm": {
+        "field": {
+            "username": {
+                "placeholder": "Нік"
+            }
+        },
+        "submit": "Створити гравця"
     }
 }

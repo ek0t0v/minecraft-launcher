@@ -6,9 +6,10 @@
         <app-input
             class="create-user-form__element"
             :value="username"
+            :placeholder="$t('createUserForm.field.username.placeholder')"
             @on-change="updateUsername"
         />
-        <app-button @on-click="onSubmit">Create user</app-button>
+        <app-button @on-click="onSubmit">{{ $t('createUserForm.submit') }}</app-button>
     </form>
 </template>
 

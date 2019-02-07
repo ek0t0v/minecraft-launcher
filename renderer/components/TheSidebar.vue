@@ -1,32 +1,47 @@
 <template>
     <div class="sidebar">
-        <div class="sidebar-menu">
+
+        <!-- menu -->
+        <div
+            class="sidebar-menu"
+            :class="{ 'sidebar-menu--left': config.sidebarPosition === 'left' }"
+        >
+
+            <!-- menu > home -->
             <router-link
                 class="sidebar-menu__button"
-                to="users"
+                to="home"
             >
-                <i class="sidebar-menu__icon fas fa-users" />
+                <i class="sidebar-menu__icon fas fa-home" />
             </router-link>
+
+            <!-- menu > settings -->
             <router-link
                 class="sidebar-menu__button"
                 to="settings"
             >
                 <i class="sidebar-menu__icon fas fa-cog" />
             </router-link>
+
+            <!-- menu > info -->
             <router-link
                 class="sidebar-menu__button"
                 to="about"
             >
                 <i class="sidebar-menu__icon fas fa-info" />
             </router-link>
+
         </div>
+
+        <!-- play -->
         <div class="sidebar-play">
+
+            <!-- play > user -->
             <app-select
                 class="sidebar-play__element"
                 :current="lastUserUsername"
                 :appears-from="'bottom'"
                 :placeholder="$t('play.username.placeholder')"
-                :is-disabled="isUsersEmpty"
                 :max-height="200"
             >
                 <app-select-option
@@ -36,7 +51,22 @@
                 >
                     {{ user.username }}
                 </app-select-option>
+                <app-select-option-delimiter v-if="!isUsersEmpty" />
+                <app-select-action-option
+                    :css-icon-class="'fas fa-plus'"
+                    @click.native="openCreateUserModal"
+                >
+                    {{ $t('play.username.action.createUser') }}
+                </app-select-action-option>
+                <app-select-action-option
+                    :css-icon-class="'fas fa-user-cog'"
+                    @click.native="goToUsersPage"
+                >
+                    {{ $t('play.username.action.manageUsers') }}
+                </app-select-action-option>
             </app-select>
+
+            <!-- play > version -->
             <app-select
                 class="sidebar-play__element"
                 :current="lastVersionName"
@@ -55,14 +85,18 @@
                     {{ version.name }}
                 </version-select-option>
             </app-select>
+
+            <!-- play > play button -->
             <app-button
                 class="sidebar-play__element"
-                :is-disabled="isVersionsEmpty || !config.lastVersion"
+                :is-disabled="isVersionsEmpty || !config.lastVersion || !config.lastUser"
                 @on-click="play"
             >
                 {{ playButtonText }}
             </app-button>
+
         </div>
+
     </div>
 </template>
 
@@ -75,12 +109,17 @@
     import { mapGetters, mapActions } from 'vuex';
     import VersionSelectOption from './VersionSelectOption';
     import AppSelectOption from './App/AppSelectOption';
+    import AppSelectActionOption from './App/AppSelectActionOption';
+    import CreateUserForm from './CreateUserForm';
+    import AppSelectOptionDelimiter from './App/AppSelectOptionDelimiter';
 
     export default {
         name: 'TheSidebar',
         components: {
+            AppSelectOptionDelimiter,
             AppSelectOption,
             VersionSelectOption,
+            AppSelectActionOption,
             AppButton,
             AppInput,
             AppSelect,
@@ -125,6 +164,14 @@
             selectUser(user) {
                 this.setLastUser(user);
             },
+            openCreateUserModal() {
+                this.$modal.open(CreateUserForm, null, {
+                    header: this.$t('modal.createUser.header'),
+                });
+            },
+            goToUsersPage() {
+                this.$router.push('users');
+            },
         },
     }
 </script>
@@ -145,6 +192,10 @@
 
         .flex(row, nowrap, flex-end, flex-start);
         width: 100%;
+
+        &--left {
+            justify-content: flex-start;
+        }
 
         &__button {
 

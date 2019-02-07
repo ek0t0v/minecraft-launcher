@@ -2,13 +2,12 @@
     <div class="page">
         <app-page-header>{{ $t('users.header.title') }}</app-page-header>
         <app-page-content class="users">
-            <button @click="openCreateUserModal">Create user</button>
-            <div
-                class="users-list"
-                v-for="(user, index) in config.users"
-                :key="index"
-            >
-                <div class="users-list__item">
+            <div class="users-list">
+                <div
+                    class="users-list__item"
+                    v-for="(user, index) in config.users"
+                    :key="index"
+                >
                     <span class="users-list__username">{{ user.username }}</span>
                     <span
                         class="users-list__remove-button"
@@ -25,7 +24,6 @@
 <script>
     import AppPageHeader from '../App/AppPageHeader';
     import AppPageContent from '../App/AppPageContent';
-    import CreateUserForm from '../CreateUserForm';
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
@@ -43,18 +41,6 @@
             ...mapActions('config', {
                 removeUser: 'removeUser',
             }),
-            openCreateUserModal() {
-                this.$modal.open(CreateUserForm, {
-                    action: () => console.log('action'),
-                    payload: {},
-                    text: 'asasfsaf',
-                    confirmButtonText: 'OK',
-                    cancelButtonText: 'Cancel',
-                    danger: true,
-                }, {
-                    header: 'Create user',
-                });
-            },
         },
     }
 </script>
@@ -63,6 +49,34 @@
     @import (reference) '../../styles/style';
 
     .users {
+        width: 100%;
+    }
+
+    .users-list {
+
+        .flex(column, nowrap, flex-start, flex-start);
+        width: 100%;
+
+        &__item {
+
+            .flex(row, nowrap, space-between, center);
+            width: 100%;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,.1);
+
+            &:last-child {
+                border: none;
+            }
+
+        }
+
+        &__username {
+            .font(@classic__g__font, 15px, 700, #222);
+        }
+
+        &__remove-button {
+            font-size: 13px;
+        }
 
     }
 </style>

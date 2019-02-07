@@ -4,7 +4,9 @@
             class="version-select-option__installed-mark"
             :class="{ 'version-select-option__installed-mark--installed': isInstalled }"
         />
-        <slot />
+        <div class="version-select-option__text">
+            <slot />
+        </div>
     </div>
 </template>
 
@@ -23,8 +25,6 @@
     .version-select-option {
 
         .flex(row, nowrap, flex-start, center);
-        .text-clip;
-        .font(@classic__g__font, 13px, 400, @classic__version-select-option__color);
         width: 100%;
         padding: 6px 12px;
         cursor: pointer;
@@ -47,5 +47,11 @@
             }
 
         }
+
+        &__text {
+            .text-clip;
+            .font(@classic__g__font, 13px, 400, @classic__version-select-option__color);
+        }
+
     }
 </style>
