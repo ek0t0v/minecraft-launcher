@@ -1,5 +1,7 @@
 # launcher
 
+![](demo.gif)
+
 ## Установка и запуск
 
 - `docker-compose run node npm install && docker-compose run node npm run build` установить зависимости и собрать приложение
